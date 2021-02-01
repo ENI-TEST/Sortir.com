@@ -24,14 +24,14 @@ class Inscriptions
     private $date_inscription;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Sorties", inversedBy="inscriptions")
      */
-    private $sorties_no_sortie;
+    private $sortie;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne (targetEntity="App\Entity\Participants", inversedBy="inscriptions")
      */
-    private $participants_no_participant;
+    private $participant;
 
     public function getId(): ?int
     {
@@ -50,27 +50,38 @@ class Inscriptions
         return $this;
     }
 
-    public function getSortiesNoSortie(): ?int
+    /**
+     * @return mixed
+     */
+    public function getSortie()
     {
-        return $this->sorties_no_sortie;
+        return $this->sortie;
     }
 
-    public function setSortiesNoSortie(int $sorties_no_sortie): self
+    /**
+     * @param mixed $sortie
+     */
+    public function setSortie($sortie): void
     {
-        $this->sorties_no_sortie = $sorties_no_sortie;
-
-        return $this;
+        $this->sortie = $sortie;
     }
 
-    public function getParticipantsNoParticipant(): ?int
+    /**
+     * @return mixed
+     */
+    public function getParticipant()
     {
-        return $this->participants_no_participant;
+        return $this->participant;
     }
 
-    public function setParticipantsNoParticipant(int $participants_no_participant): self
+    /**
+     * @param mixed $participant
+     */
+    public function setParticipant($participant): void
     {
-        $this->participants_no_participant = $participants_no_participant;
-
-        return $this;
+        $this->participant = $participant;
     }
+
+
+
 }

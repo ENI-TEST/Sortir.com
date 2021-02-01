@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @UniqueEntity(fields={"pseudo", "email"})
  * @ORM\Entity(repositoryClass=ParticipantsRepository::class)
  */
 class Participants
@@ -58,9 +62,43 @@ class Participants
     private $actif;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="participants")
      */
-    private $campus_no_campus;
+    private $campus;
+
+    /**
+     * @ORM\OneToMany (targetEntity="App\Entity\Inscriptions", mappedBy="participant")
+     */
+    private $inscriptions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="organisateur")
+     */
+    private $sorties;
+
+
+
+
+    public function __construct()
+    {
+        $this->inscriptions = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCampus()
+    {
+        return $this->campus;
+    }
+
+    /**
+     * @param mixed $campus
+     */
+    public function setCampus($campus): void
+    {
+        $this->campus = $campus;
+    }
 
     public function getId(): ?int
     {
@@ -163,15 +201,37 @@ class Participants
         return $this;
     }
 
-    public function getCampusNoCampus(): ?int
+    /**
+     * @return ArrayCollection
+     */
+    public function getInscriptions(): ArrayCollection
     {
-        return $this->campus_no_campus;
+        return $this->inscriptions;
     }
 
-    public function setCampusNoCampus(int $campus_no_campus): self
+    /**
+     * @param ArrayCollection $inscriptions
+     */
+    public function setInscriptions(ArrayCollection $inscriptions): void
     {
-        $this->campus_no_campus = $campus_no_campus;
-
-        return $this;
+        $this->inscriptions = $inscriptions;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSorties()
+    {
+        return $this->sorties;
+    }
+
+    /**
+     * @param mixed $sorties
+     */
+    public function setSorties($sorties): void
+    {
+        $this->sorties = $sorties;
+    }
+
+
 }

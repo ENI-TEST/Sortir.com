@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SortiesRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,19 +60,38 @@ class Sorties
     private $url_photo;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participants", inversedBy="sorties")
      */
     private $organisateur;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="sorties")
      */
-    private $lieux_no_lieu;
+    private $campus;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etats", inversedBy="sorties")
      */
-    private $etats_no_etat;
+    private $etat;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions", mappedBy="sortie")
+     */
+    private $inscriptions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieux", inversedBy="sorties")
+     */
+    private $lieu;
+
+
+
+
+
+    public function __construct()
+    {
+        $this->inscriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -186,27 +206,70 @@ class Sorties
         return $this;
     }
 
-    public function getLieuxNoLieu(): ?int
+    /**
+     * @return mixed
+     */
+    public function getCampus()
     {
-        return $this->lieux_no_lieu;
+        return $this->campus;
     }
 
-    public function setLieuxNoLieu(int $lieux_no_lieu): self
+    /**
+     * @param mixed $campus
+     */
+    public function setCampus($campus): void
     {
-        $this->lieux_no_lieu = $lieux_no_lieu;
-
-        return $this;
+        $this->campus = $campus;
     }
 
-    public function getEtatsNoEtat(): ?int
+    /**
+     * @return mixed
+     */
+    public function getEtat()
     {
-        return $this->etats_no_etat;
+        return $this->etat;
     }
 
-    public function setEtatsNoEtat(int $etats_no_etat): self
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat): void
     {
-        $this->etats_no_etat = $etats_no_etat;
-
-        return $this;
+        $this->etat = $etat;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getInscriptions(): ArrayCollection
+    {
+        return $this->inscriptions;
+    }
+
+    /**
+     * @param ArrayCollection $inscriptions
+     */
+    public function setInscriptions(ArrayCollection $inscriptions): void
+    {
+        $this->inscriptions = $inscriptions;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLieu()
+    {
+        return $this->lieu;
+    }
+
+    /**
+     * @param mixed $lieu
+     */
+    public function setLieu($lieu): void
+    {
+        $this->lieu = $lieu;
+    }
+
+
+
 }

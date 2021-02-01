@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LieuxRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,9 +39,21 @@ class Lieux
     private $longitude;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="lieu")
      */
-    private $villes_no_ville;
+    private $sorties;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Villes", inversedBy="lieux")
+     */
+    private $ville;
+
+
+
+    public function __construct()
+    {
+        $this->sorties = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -95,15 +108,36 @@ class Lieux
         return $this;
     }
 
-    public function getVillesNoVille(): ?int
+    /**
+     * @return ArrayCollection
+     */
+    public function getSorties(): ArrayCollection
     {
-        return $this->villes_no_ville;
+        return $this->sorties;
     }
 
-    public function setVillesNoVille(int $villes_no_ville): self
+    /**
+     * @param ArrayCollection $sorties
+     */
+    public function setSorties(ArrayCollection $sorties): void
     {
-        $this->villes_no_ville = $villes_no_ville;
-
-        return $this;
+        $this->sorties = $sorties;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * @param mixed $ville
+     */
+    public function setVille($ville): void
+    {
+        $this->ville = $ville;
+    }
+
 }
