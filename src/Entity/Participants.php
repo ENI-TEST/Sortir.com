@@ -6,13 +6,14 @@ use App\Repository\ParticipantsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @UniqueEntity(fields={"pseudo", "email"})
  * @ORM\Entity(repositoryClass=ParticipantsRepository::class)
  */
-class Participants
+class Participants implements UserInterface
 {
     /**
      * @ORM\Id
@@ -76,6 +77,10 @@ class Participants
      */
     private $sorties;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
 
 
@@ -234,4 +239,46 @@ class Participants
     }
 
 
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getPassword(): string
+    {
+        return (string) $this->mot_de_passe;
+    }
+
+    public function setPassword(string $mot_de_passe): self
+    {
+        $this->mot_de_passe = $mot_de_passe;
+
+        return $this;
+    }
+
+    public function getSalt()
+    {
+        // on laisse vide
+    }
+
+    public function getUsername()
+    {
+        return $this->pseudo;
+    }
+
+    public function eraseCredentials()
+    {
+        // on laisse vide
+    }
 }
