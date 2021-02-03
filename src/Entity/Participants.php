@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @UniqueEntity(fields={"pseudo", "email"})
  * @ORM\Entity(repositoryClass=ParticipantsRepository::class)
  */
-class Participants implements UserInterface
+class Participants implements UserInterface//, \Serializable
 {
     /**
      * @ORM\Id

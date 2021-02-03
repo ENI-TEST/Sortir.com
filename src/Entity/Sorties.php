@@ -6,6 +6,7 @@ use App\Repository\SortiesRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortiesRepository::class)
@@ -20,6 +21,8 @@ class Sorties
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Donnez au moins un nom à votre sortie..!")
+     * @Assert\Length(max="30", maxMessage="Le nom ne doit pas excéder 30 caractères")
      * @ORM\Column(type="string", length=30)
      */
     private $nom;
