@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{% block title %}Sortir.com{% endblock %}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    </head>
+    <body>
+    <div class="container">
+
+            <header class="row mb-5">
+                <div class="col-sm-1">
+                    <a href=""><img src="{{ asset('img/logo.jpg') }}"
+                    alt="logo du site représentant une montagne sur laquelle est écrit Lorem Ipsum"
+                        class="logo"></a>
+                </div>
+                <div class="col-sm-10 text-left">
+                    <h1>Sortir.com</h1>
+                </div>
+            </header>
+
+
+
+    {# {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}#}
+
+        {% block body %}
+
+        {% endblock %}
+        <footer class="mt-5">
+            <div class="container my-3">
+                <p class="text-center">&copy;Sortir.com {{ "now"|date("Y") }}</p>
+            </div>
+        </footer>
+    </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+    </body>
+</html>
