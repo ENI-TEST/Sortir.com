@@ -65,7 +65,7 @@ class Sorties
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Participants", inversedBy="sorties")
      */
-    private $organisateur;
+    protected $organisateur;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="sorties")
@@ -197,12 +197,12 @@ class Sorties
         return $this;
     }
 
-    public function getOrganisateur(): ?int
+    public function getOrganisateur()//: ?int
     {
         return $this->organisateur;
     }
 
-    public function setOrganisateur(int $organisateur): self
+    public function setOrganisateur($organisateur): self
     {
         $this->organisateur = $organisateur;
 

@@ -48,7 +48,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
     {
         $credentials = [
             'username' => $request->request->get('username'),
-            #'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
@@ -70,7 +69,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         $user = $this
             ->entityManager
             ->getRepository(Participants::class)
-            #->findOneBy(['email' => $credentials['email']]);
             ->findOneByPseudoOrEmail($credentials['username']);
 
         if (!$user) {

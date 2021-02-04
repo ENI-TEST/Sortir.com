@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Participants;
 use App\Entity\Sorties;
 use App\Form\CreationSortieType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,10 +18,17 @@ class SortieController extends AbstractController
      */
     public function creationSortie(EntityManagerInterface $em, Request $request): Response
     {
+        $username = $this->getUser()->getUsername();
+        $organisateur = $this->getDoctrine()->getRepository(Participants::class)
+            ->findOneByPseudoOrEmail($username);
+        //$organisateurId = $organisateur->getId();
+
         $sortie = new Sorties();
+        $sortie->setOrganisateur($organisateur);
         $sortieForm = $this->createForm(CreationSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
         if($sortieForm->isSubmitted() && $sortieForm->isValid()){
+
             $em->persist($sortie);
             $em->flush();
 
