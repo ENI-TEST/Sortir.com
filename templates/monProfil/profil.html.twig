@@ -4,7 +4,7 @@
 
 {% block body %}
 
-        <div class="w-50" >
+        <div class=" container w-50" >
                 <h2 class="text-center">Mon profil</h2>
                 {{ form_start(participantForm)  }}
                 {{ form_widget(participantForm) }}
@@ -12,5 +12,6 @@
                 <button type="submit" class="btn btn-success">Enregistrer</button>
                 <button type="submit" formnovalidate class="btn btn-danger">Annuler</button>
                 {{ form_end(participantForm) }}
+                </div>
         </div>
 {% endblock %}
