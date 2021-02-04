@@ -14,6 +14,7 @@ class AfficherProfilController extends AbstractController
     public function afficher(): Response
     {
 
+
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 

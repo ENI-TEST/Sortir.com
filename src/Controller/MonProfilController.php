@@ -30,7 +30,7 @@ class MonProfilController extends AbstractController
             $em->persist($participant);
             $em->flush();
 
-            $this->addFlash('Succès', 'Votre profil a bien été enregistré');
+            $this->addFlash('message', 'Votre profil a bien été génér');
             return $this->redirectToRoute('home');
 
         }
