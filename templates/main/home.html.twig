@@ -1,9 +1,38 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme sortieSearchForm 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
     <a href="{{ path('sortie_creation') }}">Créer une sortie</a>
     <a href="{{ path('app_logout') }}">Logout</a>
 
     <h1 class="text-center">test</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_start(sortieSearchForm) }}
+                {{ form_row(sortieSearchForm.nomCampus) }}
+                {{ form_row(sortieSearchForm.motCle) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(sortieSearchForm.dateDebutSearch) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(sortieSearchForm.dateFinSearch) }}
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-6">
+                {{ form_row(sortieSearchForm.sortieOrganisateur) }}
+                {{ form_row(sortieSearchForm.sortieInscrit) }}
+                {{ form_row(sortieSearchForm.sortieNonInscrit) }}
+                {{ form_row(sortieSearchForm.sortiePassees) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+            {{ form_end(sortieSearchForm) }}
+        </div>
+
+    </div>
 
 {% endblock %}
