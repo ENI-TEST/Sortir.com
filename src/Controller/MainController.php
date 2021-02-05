@@ -23,6 +23,7 @@ class MainController extends AbstractController
         $sortieSearchForm->handleRequest($request);
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
         $sorties= $sortiesRepo->findAll();
+        //dd($sorties);
         return $this->render('main/home.html.twig', [
             'controller_name' => 'MainController',
             'sorties' => $sorties,

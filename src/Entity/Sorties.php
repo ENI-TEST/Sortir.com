@@ -96,118 +96,167 @@ class Sorties
         $this->inscriptions = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNom()
     {
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    /**
+     * @param mixed $nom
+     */
+    public function setNom($nom): void
     {
         $this->nom = $nom;
-
-        return $this;
     }
 
-    public function getDateDebut(): ?DateTimeInterface
+    /**
+     * @return mixed
+     */
+    public function getDateDebut()
     {
         return $this->date_debut;
     }
 
-    public function setDateDebut(DateTimeInterface $date_debut): self
+    /**
+     * @param mixed $date_debut
+     */
+    public function setDateDebut($date_debut): void
     {
         $this->date_debut = $date_debut;
-
-        return $this;
     }
 
-    public function getDuree(): ?int
+    /**
+     * @return mixed
+     */
+    public function getDuree()
     {
         return $this->duree;
     }
 
-    public function setDuree(?int $duree): self
+    /**
+     * @param mixed $duree
+     */
+    public function setDuree($duree): void
     {
         $this->duree = $duree;
-
-        return $this;
     }
 
-    public function getDateCloture(): ?DateTimeInterface
+    /**
+     * @return mixed
+     */
+    public function getDateCloture()
     {
         return $this->date_cloture;
     }
 
-    public function setDateCloture(DateTimeInterface $date_cloture): self
+    /**
+     * @param mixed $date_cloture
+     */
+    public function setDateCloture($date_cloture): void
     {
         $this->date_cloture = $date_cloture;
-
-        return $this;
     }
 
-    public function getNbInscriptionsMax(): ?int
+    /**
+     * @return mixed
+     */
+    public function getNbInscriptionsMax()
     {
         return $this->nb_inscriptions_max;
     }
 
-    public function setNbInscriptionsMax(int $nb_inscriptions_max): self
+    /**
+     * @param mixed $nb_inscriptions_max
+     */
+    public function setNbInscriptionsMax($nb_inscriptions_max): void
     {
         $this->nb_inscriptions_max = $nb_inscriptions_max;
-
-        return $this;
     }
 
-    public function getDescriptionInfos(): ?string
+    /**
+     * @return mixed
+     */
+    public function getDescriptionInfos()
     {
         return $this->description_infos;
     }
 
-    public function setDescriptionInfos(?string $description_infos): self
+    /**
+     * @param mixed $description_infos
+     */
+    public function setDescriptionInfos($description_infos): void
     {
         $this->description_infos = $description_infos;
-
-        return $this;
     }
 
-    public function getEtatSortie(): ?int
+    /**
+     * @return mixed
+     */
+    public function getEtatSortie()
     {
         return $this->etat_sortie;
     }
 
-    public function setEtatSortie(int $etat_sortie): self
+    /**
+     * @param mixed $etat_sortie
+     */
+    public function setEtatSortie($etat_sortie): void
     {
         $this->etat_sortie = $etat_sortie;
-
-        return $this;
     }
 
-    public function getUrlPhoto(): ?string
+    /**
+     * @return mixed
+     */
+    public function getUrlPhoto()
     {
         return $this->url_photo;
     }
 
-    public function setUrlPhoto(?string $url_photo): self
+    /**
+     * @param mixed $url_photo
+     */
+    public function setUrlPhoto($url_photo): void
     {
         $this->url_photo = $url_photo;
-
-        return $this;
     }
 
-    public function getOrganisateur(): ?int
+    /**
+     * @return mixed
+     */
+    public function getOrganisateur()
     {
         return $this->organisateur;
     }
 
-    public function setOrganisateur(int $organisateur): self
+    /**
+     * @param mixed $organisateur
+     */
+    public function setOrganisateur($organisateur): void
     {
         $this->organisateur = $organisateur;
-
-        return $this;
     }
+
+
 
     /**
      * @return mixed
