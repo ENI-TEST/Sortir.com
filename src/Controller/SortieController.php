@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Participants;
 use App\Entity\Sorties;
 use App\Form\CreationSortieType;
@@ -40,6 +41,25 @@ class SortieController extends AbstractController
         return $this->render('sortie/creation_sortie.html.twig', [
             'controller_name' => 'SortieController',
             'sortieForm' => $sortieForm->createView()
+        ]);
+    }
+
+
+    /**
+     * @Route("filtresSorties", name="sortie_filtres")
+     */
+    public function filtresSorties(EntityManagerInterface $em, Request $request): Response
+    {
+        $campus = $this->getDoctrine()->getRepository(Campus::class)
+            ->findAll();
+        $sorties = $this->getDoctrine()->getRepository(Sorties::class)
+            ->findAll();
+
+
+        return $this->render('sortie/filtres_sorties.html.twig', [
+            'controller_name' => 'SortieController',
+            'campus' => $campus,
+            'sorties' => $sorties,
         ]);
     }
 }
