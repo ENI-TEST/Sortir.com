@@ -19,8 +19,27 @@
                     alt="logo du site représentant une montagne sur laquelle est écrit Lorem Ipsum"
                         class="logo"></a>
                 </div>
-                <div class="col-10 text-left">
+                <div class="col-2 text-left">
                     <h1>Sortir.com</h1>
+                </div>
+                <div class="row col-sm-8 text-right">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="col">
+                            <a href="">Villes</a>
+                        </div>
+                        <div class="col">
+                            <a href="">Campus</a>
+                        </div>
+                    {% endif %}
+                    <div class="col">
+                        <a href="{{ path('home') }}">Accueil</a>
+                    </div>
+                    <div class="col">
+                        <a href="">Mon profil</a>
+                    </div>
+                    <div class="col">
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </div>
                 </div>
             </header>
 
