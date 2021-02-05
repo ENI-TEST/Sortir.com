@@ -25,6 +25,7 @@ class MainController extends AbstractController
         $sorties= $sortiesRepo->findAll();
         return $this->render('main/home.html.twig', [
             'controller_name' => 'MainController',
+            'sorties' => $sorties,
             'sortieSearchForm' => $sortieSearchForm->createView()
         ]);
     }
