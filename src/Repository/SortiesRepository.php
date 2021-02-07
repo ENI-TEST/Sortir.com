@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Sorties;
+use App\Entity\SortieSearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +21,29 @@ class SortiesRepository extends ServiceEntityRepository
         parent::__construct($registry, Sorties::class);
     }
 
+    public function findSorties(SortieSearchData $searchData)
+    {
+        $qb = $this
+            ->createQueryBuilder('s')
+            ->select('p.nom, p.prenom, c.nom_campus, e.libelle,l.nom_lieu, l.rue, 
+                           v.code_postal, l.latitude, l.longitude, s.nom, s.date_debut,
+                           s.duree, s.date_cloture, s.nb_inscriptions_max, s.description_infos,
+                            s.etat_sortie, s.url_photo')
+            ->innerJoin('s.etat', 'e', 'e.id = s.etat_id' )
+            ->innerJoin('s.organisateur', 'p', 'p.id = s.organisateur_id')
+            ->innerJoin('s.campus','c', 'c.id = s.campus_id')
+            ->innerJoin('s.lieu', 'l', 'l.id = s.lieu_id')
+            ->innerJoin('l.ville', 'v', 'v.id = l.ville_id');
+
+        if(!empty($searchData->getMotCle())){
+            $qb = $qb
+            ->andWhere('s.nom LIKE :motCle')
+            ->setParameter('motCle', "%{$searchData->getMotCle()}");
+
+        }
+
+        return $query = $qb->getQuery()->getResult();
+    }
     // /**
     //  * @return Sorties[] Returns an array of Sorties objects
     //  */

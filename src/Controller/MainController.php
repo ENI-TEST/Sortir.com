@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sorties;
-use App\Entity\SortieSearchFilter;
+use App\Entity\SortieSearchData;
 use App\Form\SortieFilterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,12 +18,13 @@ class MainController extends AbstractController
      */
     public function home(EntityManagerInterface $em, Request $request): Response
     {
-        $sortieSearchFilter = new SortieSearchFilter();
-        $sortieSearchForm = $this->createForm(SortieFilterType::class, $sortieSearchFilter);
+        $sortieDataSearch = new SortieSearchData();
+        $sortieSearchForm = $this->createForm(SortieFilterType::class, $sortieDataSearch);
         $sortieSearchForm->handleRequest($request);
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
-        $sorties= $sortiesRepo->findAll();
-        //dd($sorties);
+        //$sorties= $sortiesRepo->findSorties();
+        //dd($sortieDataSearch);
+        $sorties= $sortiesRepo->findSorties($sortieDataSearch);
         return $this->render('main/home.html.twig', [
             'controller_name' => 'MainController',
             'sorties' => $sorties,

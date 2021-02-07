@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Campus;
-use App\Entity\SortieSearchFilter;
+use App\Entity\SortieSearchData;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -33,6 +33,7 @@ class SortieFilterType extends AbstractType
 
             ->add('dateDebutSearch', DateTimeType::class, [
                 'label' => 'Entre ',
+                'required' => false,
                 'placeholder' => [
                     'year' => 'AAAA', 'month' => 'MM', 'day' => 'JJ',
                     'hour' => 'hh', 'minute' => 'mm',
@@ -40,6 +41,7 @@ class SortieFilterType extends AbstractType
             ])
             ->add('dateFinSearch', DateTimeType::class, [
                 'label' => ' et ',
+                'required' => false,
                 'placeholder' => [
                     'year' => 'AAAA', 'month' => 'MM', 'day' => 'JJ',
                     'hour' => 'hh', 'minute' => 'mm',
@@ -72,7 +74,7 @@ class SortieFilterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => SortieSearchFilter::class,
+            'data_class' => SortieSearchData::class,
 
         ]);
     }

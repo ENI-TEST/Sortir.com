@@ -4,17 +4,19 @@
 namespace App\Entity;
 
 use App\Entity\Sorties;
+use App\Entity\Campus;
 
 
-class SortieSearchFilter
+class SortieSearchData
 {
     /**
-     * @var string
+     * @var Campus
      */
     private $nomCampus = '';
 
+
     /**
-     * @var string
+     * @var string | null
      */
     private $motCle = '';
 
@@ -46,38 +48,39 @@ class SortieSearchFilter
      */
     private $sortiePassees = false;
 
-
     /**
-     * @return string
+     * @return \App\Entity\Campus
      */
-    public function getNomCampus(): string
+    public function getNomCampus()
     {
         return $this->nomCampus;
     }
 
     /**
-     * @param string $nomCampus
+     * @param \App\Entity\Campus $nomCampus
      */
-    public function setNomCampus(string $nomCampus): void
+    public function setNomCampus($nomCampus): void
     {
         $this->nomCampus = $nomCampus;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMotCle(): string
+    public function getMotCle(): ?string
     {
         return $this->motCle;
     }
 
     /**
-     * @param string $motCle
+     * @param string|null $motCle
      */
-    public function setMotCle(string $motCle): void
+    public function setMotCle(?string $motCle): void
     {
         $this->motCle = $motCle;
     }
+
+
 
     /**
      * @return mixed
