@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CreationSortieType extends AbstractType
+class ModifSortieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -46,22 +46,16 @@ class CreationSortieType extends AbstractType
                     'rows' => "5",
                 ]
             ])
-            #->add('etat_sortie')
-            #->add('url_photo')
-            /*->add('organisateur', IntegerType::class, [
-                'attr' => ['readonly' => true,
-                ]])*/
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom_campus',
                 'attr' => ['readonly' => true,
-            ]])
+                ]])
             ->add('ville', EntityType::class, [
                 'class' => Villes::class,
                 'choice_label' => 'nom_ville',
                 'mapped' => false,
             ])
-            #->add('etat')
             ->add('lieu', EntityType::class, [
                 'class' => Lieux::class,
                 'label' => 'Lieu :',

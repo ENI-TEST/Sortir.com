@@ -78,7 +78,7 @@ class Sorties
     private $etat;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions", mappedBy="sortie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions", mappedBy="sortie", cascade={"remove"})
      */
     private $inscriptions;
 
@@ -241,18 +241,12 @@ class Sorties
         $this->etat = $etat;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getInscriptions(): ArrayCollection
+    public function getInscriptions()
     {
         return $this->inscriptions;
     }
 
-    /**
-     * @param ArrayCollection $inscriptions
-     */
-    public function setInscriptions(ArrayCollection $inscriptions): void
+    public function setInscriptions($inscriptions): void
     {
         $this->inscriptions = $inscriptions;
     }
@@ -273,6 +267,12 @@ class Sorties
         $this->lieu = $lieu;
     }
 
-
+    public function checkIfInscrit(Participants $p): bool
+    {
+        return $this->inscriptions->exists(function($key, $inscription) use($p)
+        {
+            return ($inscription->getUser() == $p);
+        });
+    }
 
 }

@@ -67,7 +67,7 @@ class Participants implements UserInterface//, \Serializable
     private $campus;
 
     /**
-     * @ORM\OneToMany (targetEntity="App\Entity\Inscriptions", mappedBy="participant")
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions", mappedBy="participant")
      */
     private $inscriptions;
 

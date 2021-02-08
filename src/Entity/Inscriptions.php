@@ -29,7 +29,7 @@ class Inscriptions
     private $sortie;
 
     /**
-     * @ORM\ManyToOne (targetEntity="App\Entity\Participants", inversedBy="inscriptions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participants", inversedBy="inscriptions")
      */
     private $participant;
 
@@ -81,7 +81,6 @@ class Inscriptions
     {
         $this->participant = $participant;
     }
-
 
 
 }
