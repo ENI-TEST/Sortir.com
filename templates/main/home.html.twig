@@ -6,6 +6,11 @@
     <a href="{{ path('sortie_creation') }}">Créer une sortie</a>
     <a href="{{ path('app_logout') }}">Logout</a>
 
+    <div class="col-sm-3 offset-sm-9 text-right">
+        <p>Date du jour : {{ "now" | date('d/m/Y') }}</p>
+        <p>Participant : {{ participant.prenom }} {{ participant.nom | upper }}</p>
+    </div>
+
     <h1 class="text-center">test</h1>
 
     <div class="container">
@@ -55,6 +60,11 @@
                 </tr>
             {% endfor %}
         </table>
+
+        <div class="col-4 offset-4 mt-5">
+            <a href="{{ path('sortie_creation') }}" class="text-decoration-none">
+                <button class="btn btn-primary btn-lg btn-block">Créer une sortie</button></a>
+        </div>
 
     </div>
 
