@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Sorties;
+use App\Entity\Sortie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -14,7 +14,7 @@ class SortiesFixture extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $sortie1 = new Sorties();
+        $sortie1 = new Sortie();
         $sortie1->setOrganisateur($this->getReference(ParticipantsFixtures::USER_2));
         $sortie1->setCampus($this->getReference(CampusFixtures::CAMPUS2));
         $sortie1->setEtat($this->getReference(EtatsFixtures::ETAT_1));
@@ -26,7 +26,7 @@ class SortiesFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($sortie1);
         $manager->flush();
 
-        $sortie2 = new Sorties();
+        $sortie2 = new Sortie();
         $sortie2->setOrganisateur($this->getReference(ParticipantsFixtures::USER_2));
         $sortie2->setCampus($this->getReference(CampusFixtures::CAMPUS2));
         $sortie2->setEtat($this->getReference(EtatsFixtures::ETAT_2));
@@ -39,7 +39,7 @@ class SortiesFixture extends Fixture implements DependentFixtureInterface
         $manager->flush();
         $this->addReference(self::SORTIE_2, $sortie2 );
 
-        $sortie3 = new Sorties();
+        $sortie3 = new Sortie();
         $sortie3->setOrganisateur($this->getReference(ParticipantsFixtures::USER_3));
         $sortie3->setCampus($this->getReference(CampusFixtures::CAMPUS3));
         $sortie3->setEtat($this->getReference(EtatsFixtures::ETAT_6));
@@ -51,7 +51,7 @@ class SortiesFixture extends Fixture implements DependentFixtureInterface
         $manager->persist($sortie3);
         $manager->flush();
 
-        $sortie4 = new Sorties();
+        $sortie4 = new Sortie();
         $sortie4->setOrganisateur($this->getReference(ParticipantsFixtures::USER_3));
         $sortie4->setCampus($this->getReference(CampusFixtures::CAMPUS3));
         $sortie4->setEtat($this->getReference(EtatsFixtures::ETAT_5));
@@ -64,7 +64,7 @@ class SortiesFixture extends Fixture implements DependentFixtureInterface
         $manager->flush();
         $this->addReference(self::SORTIE_4, $sortie4 );
 
-        $sortie5 = new Sorties();
+        $sortie5 = new Sortie();
         $sortie5->setOrganisateur($this->getReference(ParticipantsFixtures::USER_4));
         $sortie5->setCampus($this->getReference(CampusFixtures::CAMPUS1));
         $sortie5->setEtat($this->getReference(EtatsFixtures::ETAT_7));

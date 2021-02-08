@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Sorties;
+use App\Entity\Sortie;
 use App\Form\CreationSortieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +17,7 @@ class SortieController extends AbstractController
      */
     public function creationSortie(EntityManagerInterface $em, Request $request): Response
     {
-        $sortie = new Sorties();
+        $sortie = new Sortie();
         $sortieForm = $this->createForm(CreationSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
         if($sortieForm->isSubmitted() && $sortieForm->isValid()){

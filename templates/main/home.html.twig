@@ -45,12 +45,12 @@
             {% for sortie in sorties %}
                 <tr>
                     <td>{{ sortie.nom }}</td>
-                    <td>{{ sortie.date_debut | date('d/M/Y H:i') }}</td>
-                    <td>{{ sortie.date_cloture | date('d/M/Y H:i') }}</td>
-                    <td>X/{{ sortie.nb_inscriptions_max }}</td>
-                    <td>{{ sortie.libelle }}</td>
+                    <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>
+                    <td>{{ sortie.dateCloture | date('d/m/Y H:i') }}</td>
+                    <td>X/{{ sortie.nbInscriptionsMax }}</td>
+                    <td>{{ sortie.etat.libelle }}</td>
                     <td>Etat à définir</td>
-                    <td>{{ sortie.prenom }} {{ sortie.nom | upper }}</td>
+                    <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom | upper }}</td>
                     <td>Actions à définir</td>
                 </tr>
             {% endfor %}

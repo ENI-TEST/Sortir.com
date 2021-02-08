@@ -4,7 +4,7 @@
 namespace App\DataFixtures;
 
 
-use App\Entity\Participants;
+use App\Entity\Participant;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -27,7 +27,7 @@ class ParticipantsFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $participant1 = new Participants();
+        $participant1 = new Participant();
         $participant1->setCampus($this->getReference(CampusFixtures::CAMPUS1));
         $participant1->setPseudo('admin');
         $participant1->setNom('admin');
@@ -40,7 +40,7 @@ class ParticipantsFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($participant1);
         $manager->flush();
 
-        $participant2 = new Participants();
+        $participant2 = new Participant();
         $participant2->setCampus($this->getReference(CampusFixtures::CAMPUS2));
         $participant2->setPseudo('toto');
         $participant2->setNom('toto');
@@ -54,7 +54,7 @@ class ParticipantsFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
         $this->addReference(self::USER_2, $participant2);
 
-        $participant3 = new Participants();
+        $participant3 = new Participant();
         $participant3->setCampus($this->getReference(CampusFixtures::CAMPUS3));
         $participant3->setPseudo('tata');
         $participant3->setNom('tata');
@@ -68,7 +68,7 @@ class ParticipantsFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
         $this->addReference(self::USER_3, $participant3);
 
-        $participant4 = new Participants();
+        $participant4 = new Participant();
         $participant4->setCampus($this->getReference(CampusFixtures::CAMPUS1));
         $participant4->setPseudo('titi');
         $participant4->setNom('titi');

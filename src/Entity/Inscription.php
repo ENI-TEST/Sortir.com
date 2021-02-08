@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\InscriptionsRepository;
+use App\Repository\InscriptionRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=InscriptionsRepository::class)
  */
-class Inscriptions
+class Inscription
 {
     /**
      * @ORM\Id
@@ -21,34 +21,40 @@ class Inscriptions
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_inscription;
+    private $dateInscription;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Sorties", inversedBy="inscriptions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Sortie", inversedBy="inscriptions")
      */
     private $sortie;
 
     /**
-     * @ORM\ManyToOne (targetEntity="App\Entity\Participants", inversedBy="inscriptions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participant", inversedBy="inscriptions")
      */
     private $participant;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateInscription(): ?DateTimeInterface
+    /**
+     * @return mixed
+     */
+    public function getDateInscription()
     {
-        return $this->date_inscription;
+        return $this->dateInscription;
     }
 
-    public function setDateInscription(DateTimeInterface $date_inscription): self
+    /**
+     * @param mixed $dateInscription
+     */
+    public function setDateInscription($dateInscription): void
     {
-        $this->date_inscription = $date_inscription;
-
-        return $this;
+        $this->dateInscription = $dateInscription;
     }
+
 
     /**
      * @return mixed
@@ -81,6 +87,7 @@ class Inscriptions
     {
         $this->participant = $participant;
     }
+
 
 
 

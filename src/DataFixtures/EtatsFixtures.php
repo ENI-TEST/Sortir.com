@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Etats;
+use App\Entity\Etat;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -22,48 +22,48 @@ class EtatsFixtures extends Fixture
        /* $size = count($values);
         for ($i =0; $i < $size; $i++)
         {
-            $etats = new Etats();
+            $etats = new Etat();
             $etats->setLibelle($values[$i]);
             $manager->persist($etats);
         }*/
 
-        $etat1 =  new Etats();
+        $etat1 =  new Etat();
         $etat1->setLibelle('En création');
         $manager->persist($etat1);
         $manager->flush();
         $this->addReference(self::ETAT_1, $etat1);
 
-        $etat2 =  new Etats();
+        $etat2 =  new Etat();
         $etat2->setLibelle('Ouverte');
         $manager->persist($etat2);
         $manager->flush();
         $this->addReference(self::ETAT_2, $etat2);
 
-        $etat3 =  new Etats();
+        $etat3 =  new Etat();
         $etat3->setLibelle('Clôturée');
         $manager->persist($etat3);
         $manager->flush();
         $this->addReference(self::ETAT_3, $etat3);
 
-        $etat4 =  new Etats();
+        $etat4 =  new Etat();
         $etat4->setLibelle('Annulée');
         $manager->persist($etat4);
         $manager->flush();
         $this->addReference(self::ETAT_4, $etat4);
 
-        $etat5 =  new Etats();
+        $etat5 =  new Etat();
         $etat5->setLibelle('En cours');
         $manager->persist($etat5);
         $manager->flush();
         $this->addReference(self::ETAT_5, $etat5);
 
-        $etat6 =  new Etats();
+        $etat6 =  new Etat();
         $etat6->setLibelle('Terminée');
         $manager->persist($etat6);
         $manager->flush();
         $this->addReference(self::ETAT_6, $etat6);
 
-        $etat7 =  new Etats();
+        $etat7 =  new Etat();
         $etat7->setLibelle('Historisée');
         $manager->persist($etat7);
         $manager->flush();

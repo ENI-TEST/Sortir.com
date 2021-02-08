@@ -34,38 +34,33 @@ class SortieFilterType extends AbstractType
             ->add('dateDebutSearch', DateTimeType::class, [
                 'label' => 'Entre ',
                 'required' => false,
-                'placeholder' => [
-                    'year' => 'AAAA', 'month' => 'MM', 'day' => 'JJ',
-                    'hour' => 'hh', 'minute' => 'mm',
-                ]
+                'widget' => 'single_text',
             ])
             ->add('dateFinSearch', DateTimeType::class, [
                 'label' => ' et ',
                 'required' => false,
-                'placeholder' => [
-                    'year' => 'AAAA', 'month' => 'MM', 'day' => 'JJ',
-                    'hour' => 'hh', 'minute' => 'mm',
-                ]
+                'widget' => 'single_text',
+
             ])
 
             ->add('sortieOrganisateur', CheckboxType::class, [
-                'label' =>  'Sorties dont je suis organisateur',
+                'label' =>  'Sortie dont je suis organisateur',
                 'required' => false,
 
             ])
 
             ->add('sortieInscrit', CheckboxType::class, [
-                'label' =>  'Sorties auxquelles je suis inscrit/e',
+                'label' =>  'Sortie auxquelles je suis inscrit/e',
                 'required' => false,
             ])
 
             ->add('sortieNonInscrit', CheckboxType::class, [
-                'label' =>  'Sorties auxquelles je ne suis inscrit/e',
+                'label' =>  'Sortie auxquelles je ne suis pas inscrit/e',
                 'required' => false,
             ])
 
             ->add('sortiePassees', CheckboxType::class, [
-                'label' =>  'Sorties passées',
+                'label' =>  'Sortie passées',
                 'required' => false,
             ])
         ;

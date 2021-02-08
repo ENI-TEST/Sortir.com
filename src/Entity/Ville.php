@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\VillesRepository;
+use App\Repository\VilleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=VillesRepository::class)
+ * @ORM\Entity(repositoryClass=VilleRepository::class)
  */
-class Villes
+class Ville
 {
     /**
      * @ORM\Id
@@ -26,10 +26,10 @@ class Villes
     /**
      * @ORM\Column(type="string", length=10)
      */
-    private $code_postal;
+    private $codePostal;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Lieux", mappedBy="ville")
+     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="ville")
      */
     private $lieux;
 
@@ -56,17 +56,22 @@ class Villes
         return $this;
     }
 
-    public function getCodePostal(): ?string
+    /**
+     * @return mixed
+     */
+    public function getCodePostal()
     {
-        return $this->code_postal;
+        return $this->codePostal;
     }
 
-    public function setCodePostal(string $code_postal): self
+    /**
+     * @param mixed $codePostal
+     */
+    public function setCodePostal($codePostal): void
     {
-        $this->code_postal = $code_postal;
-
-        return $this;
+        $this->codePostal = $codePostal;
     }
+
 
     /**
      * @return ArrayCollection

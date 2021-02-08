@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\ParticipantsRepository;
+use App\Repository\ParticipantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -10,9 +10,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @UniqueEntity(fields={"pseudo", "email"})
- * @ORM\Entity(repositoryClass=ParticipantsRepository::class)
+ * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participants implements UserInterface//, \Serializable
+class Participant implements UserInterface//, \Serializable
 {
     /**
      * @ORM\Id
@@ -49,7 +49,7 @@ class Participants implements UserInterface//, \Serializable
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $mot_de_passe;
+    private $motDePasse;
 
     /**
      * @ORM\Column(type="boolean")
@@ -67,12 +67,12 @@ class Participants implements UserInterface//, \Serializable
     private $campus;
 
     /**
-     * @ORM\OneToMany (targetEntity="App\Entity\Inscriptions", mappedBy="participant")
+     * @ORM\OneToMany (targetEntity="App\Entity\Inscription", mappedBy="participant")
      */
     private $inscriptions;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="organisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
      */
     private $sorties;
 
@@ -169,17 +169,23 @@ class Participants implements UserInterface//, \Serializable
         return $this;
     }
 
-    public function getMotDePasse(): ?string
+    /**
+     * @return mixed
+     */
+    public function getMotDePasse()
     {
-        return $this->mot_de_passe;
+        return $this->motDePasse;
     }
 
-    public function setMotDePasse(string $mot_de_passe): self
+    /**
+     * @param mixed $motDePasse
+     */
+    public function setMotDePasse($motDePasse): void
     {
-        $this->mot_de_passe = $mot_de_passe;
-
-        return $this;
+        $this->motDePasse = $motDePasse;
     }
+
+
 
     public function getAdministrateur(): ?bool
     {
@@ -256,12 +262,12 @@ class Participants implements UserInterface//, \Serializable
 
     public function getPassword(): string
     {
-        return (string) $this->mot_de_passe;
+        return (string) $this->motDePasse;
     }
 
-    public function setPassword(string $mot_de_passe): self
+    public function setPassword(string $motDePasse): self
     {
-        $this->mot_de_passe = $mot_de_passe;
+        $this->motDePasse = $motDePasse;
 
         return $this;
     }

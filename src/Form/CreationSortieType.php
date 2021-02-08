@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
-use App\Entity\Sorties;
-use App\Entity\Villes;
+use App\Entity\Campus;
+use App\Entity\Lieu;
+use App\Entity\Sortie;
+use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -30,23 +32,31 @@ class CreationSortieType extends AbstractType
             #->add('etat_sortie')
             #->add('url_photo')
             #->add('organisateur')
-            ->add('campus')
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'choice_label' => 'nomCampus',
+                'attr' => ['readonly' => true,
+            ]])
             /*->add('ville', EntityType::class, [
-                'class' => Villes::class,
+                'class' => Ville::class,
                 'choice_label' => 'nom_ville',
                 'label_attr' => [
                     'class' => 'labelForm',
                     'mapped' => 'false',
             ]])*/
             #->add('etat')
-            ->add('lieu')
+            ->add('lieu',EntityType::class, [
+                'class' => Lieu::class,
+                'label' => 'Lieu :',
+                'choice_label' => 'nomLieu'
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Sorties::class,
+            'data_class' => Sortie::class,
         ]);
     }
 }

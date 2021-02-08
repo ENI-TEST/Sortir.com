@@ -21,16 +21,16 @@ class Campus
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $nom_campus;
+    private $nomCampus;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participants", mappedBy="campus")
+     * @ORM\OneToMany(targetEntity="App\Entity\Participant", mappedBy="campus")
      * @var ArrayCollection
      */
     private $participants;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="campus")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="campus")
      */
     private $sorties;
 
@@ -45,19 +45,23 @@ class Campus
         return $this->id;
     }
 
-    public function getNomCampus(): ?string
+    /**
+     * @return mixed
+     */
+    public function getNomCampus()
     {
-        return $this->nom_campus;
-    }
-
-    public function setNomCampus(string $nom_campus): self
-    {
-        $this->nom_campus = $nom_campus;
-
-        return $this;
+        return $this->nomCampus;
     }
 
     /**
+     * @param mixed $nomCampus
+     */
+    public function setNomCampus($nomCampus): void
+    {
+        $this->nomCampus = $nomCampus;
+    }
+
+     /**
      * @return ArrayCollection
      */
     public function getParticipants(): ArrayCollection

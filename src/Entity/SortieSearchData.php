@@ -3,7 +3,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Sorties;
+use App\Entity\Sortie;
 use App\Entity\Campus;
 
 

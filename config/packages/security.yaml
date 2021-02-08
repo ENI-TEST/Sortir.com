@@ -1,12 +1,12 @@
 security:
     encoders:
-        App\Entity\Participants:
+        App\Entity\Participant:
             algorithm: auto
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         app_user_provider:
             entity:
-                class: App\Entity\Participants
+                class: App\Entity\Participant
         users_in_memory: { memory: null }
     firewalls:
         dev:

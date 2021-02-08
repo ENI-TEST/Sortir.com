@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\SortiesRepository;
+use App\Repository\SortieRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=SortiesRepository::class)
+ * @ORM\Entity(repositoryClass=SortieRepository::class)
  */
-class Sorties
+class Sortie
 {
     /**
      * @ORM\Id
@@ -30,7 +30,7 @@ class Sorties
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_debut;
+    private $dateDebut;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -40,30 +40,30 @@ class Sorties
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_cloture;
+    private $dateCloture;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $nb_inscriptions_max;
+    private $nbInscriptionsMax;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
      */
-    private $description_infos;
+    private $descriptionInfos;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $etat_sortie;
+    private $etatSortie;
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
      */
-    private $url_photo;
+    private $urlPhoto;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Participants", inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participant", inversedBy="sorties")
      */
     private $organisateur;
 
@@ -73,17 +73,17 @@ class Sorties
     private $campus;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Etats", inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="sorties")
      */
     private $etat;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions", mappedBy="sortie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="sortie")
      */
     private $inscriptions;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Lieux", inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="sorties")
      */
     private $lieu;
 
@@ -133,15 +133,15 @@ class Sorties
      */
     public function getDateDebut()
     {
-        return $this->date_debut;
+        return $this->dateDebut;
     }
 
     /**
-     * @param mixed $date_debut
+     * @param mixed $dateDebut
      */
-    public function setDateDebut($date_debut): void
+    public function setDateDebut($dateDebut): void
     {
-        $this->date_debut = $date_debut;
+        $this->dateDebut = $dateDebut;
     }
 
     /**
@@ -165,15 +165,15 @@ class Sorties
      */
     public function getDateCloture()
     {
-        return $this->date_cloture;
+        return $this->dateCloture;
     }
 
     /**
-     * @param mixed $date_cloture
+     * @param mixed $dateCloture
      */
-    public function setDateCloture($date_cloture): void
+    public function setDateCloture($dateCloture): void
     {
-        $this->date_cloture = $date_cloture;
+        $this->dateCloture = $dateCloture;
     }
 
     /**
@@ -181,15 +181,15 @@ class Sorties
      */
     public function getNbInscriptionsMax()
     {
-        return $this->nb_inscriptions_max;
+        return $this->nbInscriptionsMax;
     }
 
     /**
-     * @param mixed $nb_inscriptions_max
+     * @param mixed $nbInscriptionsMax
      */
-    public function setNbInscriptionsMax($nb_inscriptions_max): void
+    public function setNbInscriptionsMax($nbInscriptionsMax): void
     {
-        $this->nb_inscriptions_max = $nb_inscriptions_max;
+        $this->nbInscriptionsMax = $nbInscriptionsMax;
     }
 
     /**
@@ -197,15 +197,15 @@ class Sorties
      */
     public function getDescriptionInfos()
     {
-        return $this->description_infos;
+        return $this->descriptionInfos;
     }
 
     /**
-     * @param mixed $description_infos
+     * @param mixed $descriptionInfos
      */
-    public function setDescriptionInfos($description_infos): void
+    public function setDescriptionInfos($descriptionInfos): void
     {
-        $this->description_infos = $description_infos;
+        $this->descriptionInfos = $descriptionInfos;
     }
 
     /**
@@ -213,15 +213,15 @@ class Sorties
      */
     public function getEtatSortie()
     {
-        return $this->etat_sortie;
+        return $this->etatSortie;
     }
 
     /**
-     * @param mixed $etat_sortie
+     * @param mixed $etatSortie
      */
-    public function setEtatSortie($etat_sortie): void
+    public function setEtatSortie($etatSortie): void
     {
-        $this->etat_sortie = $etat_sortie;
+        $this->etatSortie = $etatSortie;
     }
 
     /**
@@ -229,15 +229,15 @@ class Sorties
      */
     public function getUrlPhoto()
     {
-        return $this->url_photo;
+        return $this->urlPhoto;
     }
 
     /**
-     * @param mixed $url_photo
+     * @param mixed $urlPhoto
      */
-    public function setUrlPhoto($url_photo): void
+    public function setUrlPhoto($urlPhoto): void
     {
-        $this->url_photo = $url_photo;
+        $this->urlPhoto = $urlPhoto;
     }
 
     /**
@@ -255,8 +255,6 @@ class Sorties
     {
         $this->organisateur = $organisateur;
     }
-
-
 
     /**
      * @return mixed
