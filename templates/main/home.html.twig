@@ -114,11 +114,11 @@
                     {% if participant.prenom == sortie.organisateur.prenom
                      and participant.nom == sortie.organisateur.nom %}
                         <a href="{{ path('sortie_modif',{'id': sortie.id}) }}">Modifier - </a>
-                    <a href="">Publier - </a>
+                    <a href="{{ path('sortie_publier',{'id': sortie.id}) }}">Publier - </a>
                     <a href="{{ path('sortie_annulation', {'id': sortie.id}) }}">Annuler - </a>
                     {% endif %}
-                    {% if sortie.inscriptions.contains(participant) %}{# à modifier!!! #}
-                    <a href="">S'inscrire - </a>
+                    {% if not sortie.checkIfInscrit(participant) %}
+                    <a href="">S'inscrire</a>
                     {% else %}
                     <a href="">Se désister</a>
                     {% endif %}

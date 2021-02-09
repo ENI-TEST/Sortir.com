@@ -27,19 +27,21 @@
     <div class="row col-sm-10 offset-sm-1 mt-3">
         <div class="col">
             <a href="{{ path('sortie_modif',{'id': sortie.id}) }}">
-                <button type="submit" class="btn btn-success my-3 ml-5"
+                <button type="submit" class="btn btn-success my-3 ml-3"
                         formnovalidate>Enregistrer</button></a>
         </div>
         <div class="col">
-            <a href="">
-                <button type="submit" class="btn btn-info my-3 ml-5"
-                        formnovalidate>Publier la sortie</button></a>
-        </div>
-        <div class="col">
             <a href="{{ path('home') }}">
-                <button type="submit" class="btn btn-light my-3 ml-5"
+                <button type="submit" class="btn btn-light my-3 ml-3"
                         formnovalidate>Annuler</button></a>
             {{ form_end(modifForm) }}
+        </div>
+        <div class="col">
+            <form method="post" action="{{ path('sortie_publier',{'id': sortie.id}) }}">
+                <a href="{{ path('sortie_publier',{'id': sortie.id}) }}">
+                    <button type="submit" class="btn btn-info my-3"
+                            formnovalidate>Publier la sortie</button></a>
+            </form>
         </div>
         <div class="col">
             <form method="post" action="{{ path('sortie_suppression',{'id': sortie.id}) }}"
@@ -47,7 +49,7 @@
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sortie.id) }}">
                 <a href="{{ path('sortie_suppression',{'id': sortie.id}) }}" class="text-decoration-none">
-                    <button type="submit" class="btn btn-danger btn-block my-3">
+                    <button type="submit" class="btn btn-danger btn-block my-3 ml-3">
                         Supprimer la sortie</button></a>
             </form>
         </div>

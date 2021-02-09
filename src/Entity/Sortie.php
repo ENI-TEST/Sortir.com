@@ -271,7 +271,7 @@ class Sortie
     {
         return $this->inscriptions->exists(function($key, $inscription) use($p)
         {
-            return ($inscription->getUser() == $p);
+            return ($inscription->getParticipant() == $p);
         });
     }
 

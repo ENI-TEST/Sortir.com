@@ -133,6 +133,24 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
+    /**
+     * @Route("publierSortie/{id}", name="sortie_publier")
+     */
+    public function publierSortie(EntityManagerInterface $em, $id): Response
+    {
+        $sortie=$this->getDoctrine()->getRepository(Sortie::class)->find($id);
+        if(empty($sortie)){
+            throw$this->createNotFoundException('Cette sortie n\'existe pas');
+        }
+
+        $etat = $this->getDoctrine()->getRepository(Etat::class)->findOneBy(['libelle'=>'Ouverte']);
+        $sortie->setEtat($etat);
+        $em->persist($sortie);
+        $em->flush();
+
+        $this->addFlash('success','La sortie a bien été publiée');
+        return $this->redirectToRoute('home');
+    }
 
 
 }

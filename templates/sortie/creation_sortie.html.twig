@@ -27,7 +27,7 @@
     <div class="row mt-3">
         <div class="col-sm-6 offset-sm-3">
             <a href="{{ path('sortie_creation') }}"><button type="submit" class="btn btn-success mr-5" formnovalidate>Enregistrer</button></a>
-            <a href=""><button type="submit" class="btn btn-info" formnovalidate>Publier la sortie</button></a>
+            <a href="{{ path('sortie_publier',{'id': sortie.id}) }}"><button type="submit" class="btn btn-info" formnovalidate>Publier la sortie</button></a>
             <a href="{{ path('home') }}"><button type="submit" class="btn btn-danger ml-5" formnovalidate>Annuler</button></a>
             {{ form_end(sortieForm) }}
         </div>
