@@ -50,7 +50,6 @@ class SortieRepository extends ServiceEntityRepository
                 ->andWhere('c.id = :nomCampus')
                 ->setParameter('nomCampus', $searchData->getNomCampus())
             ;
-
         }
 
         if (!empty($searchData->getDateDebutSearch() && !empty($searchData->getDateFinSearch()))){
@@ -67,7 +66,6 @@ class SortieRepository extends ServiceEntityRepository
                 ->andWhere('p.id =  :organisateur')
                 ->setParameter('organisateur', $participant)
             ;
-
         }
 
         if(!empty($searchData->isSortieInscrit()) && $searchData->isSortieInscrit() === true){
@@ -76,7 +74,6 @@ class SortieRepository extends ServiceEntityRepository
                 ->andWhere('i.participant =  :inscrit')
                 ->setParameter('inscrit', $participant)
             ;
-
         }
 
         if(!empty($searchData->isSortieNonInscrit()) && $searchData->isSortieNonInscrit() === true){
@@ -85,7 +82,6 @@ class SortieRepository extends ServiceEntityRepository
                 ->andWhere('NOT i.participant =  :nonInscrit')
                 ->setParameter('nonInscrit', $participant)
             ;
-
         }
 
         if(!empty($searchData->isSortiePassees()) && $searchData->isSortiePassees() === true){
@@ -94,9 +90,7 @@ class SortieRepository extends ServiceEntityRepository
                 ->andWhere('s.dateCloture <  :dateDujour')
                 ->setParameter('dateDujour', $dateDuJour)
             ;
-
         }
-
 
         $query = $qb->getQuery();
 
