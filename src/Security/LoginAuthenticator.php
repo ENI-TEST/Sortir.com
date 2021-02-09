@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Entity\Participants;
+use App\Entity\Participant;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,7 +68,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
 
         $user = $this
             ->entityManager
-            ->getRepository(Participants::class)
+            ->getRepository(Participant::class)
             ->findOneByPseudoOrEmail($credentials['username']);
 
         if (!$user) {

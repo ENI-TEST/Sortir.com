@@ -46,7 +46,7 @@
                   onsubmit="return confirm('Êtes vous sûr(e) de vouloir supprimer la sortie ?')">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sortie.id) }}">
-                <a href="{{ path('sortie_suppression',{'id': sortie.id}) }}">
+                <a href="{{ path('sortie_suppression',{'id': sortie.id}) }}" class="text-decoration-none">
                     <button type="submit" class="btn btn-danger btn-block my-3">
                         Supprimer la sortie</button></a>
             </form>

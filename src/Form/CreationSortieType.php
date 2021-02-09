@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Campus;
-use App\Entity\Lieux;
-use App\Entity\Sorties;
-use App\Entity\Villes;
+use App\Entity\Lieu;
+use App\Entity\Sortie;
+use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -53,19 +53,19 @@ class CreationSortieType extends AbstractType
                 ]])*/
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
-                'choice_label' => 'nom_campus',
+                'choice_label' => 'nomCampus',
                 'attr' => ['readonly' => true,
             ]])
             ->add('ville', EntityType::class, [
-                'class' => Villes::class,
-                'choice_label' => 'nom_ville',
+                'class' => Ville::class,
+                'choice_label' => 'nomVille',
                 'mapped' => false,
             ])
             #->add('etat')
             ->add('lieu', EntityType::class, [
-                'class' => Lieux::class,
+                'class' => Lieu::class,
                 'label' => 'Lieu :',
-                'choice_label' => 'nom_lieu',
+                'choice_label' => 'nomLieu',
             ])
             ->add('Rue', TextType::class, [
                 'mapped' => false,
@@ -93,7 +93,7 @@ class CreationSortieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Sorties::class,
+            'data_class' => Sortie::class,
         ]);
     }
 }

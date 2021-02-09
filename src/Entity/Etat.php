@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\EtatsRepository;
+use App\Repository\EtatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EtatsRepository::class)
+ * @ORM\Entity(repositoryClass=EtatRepository::class)
  */
-class Etats
+class Etat
 {
     /**
      * @ORM\Id
@@ -24,7 +24,7 @@ class Etats
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="etat")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="etat", cascade={"remove"})
      */
     private $sorties;
 

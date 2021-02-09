@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\ParticipantsRepository;
+use App\Repository\ParticipantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -10,9 +10,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @UniqueEntity(fields={"pseudo", "email"})
- * @ORM\Entity(repositoryClass=ParticipantsRepository::class)
+ * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participants implements UserInterface//, \Serializable
+class Participant implements UserInterface
 {
     /**
      * @ORM\Id
@@ -49,7 +49,7 @@ class Participants implements UserInterface//, \Serializable
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $mot_de_passe;
+    private $motDePasse;
 
     /**
      * @ORM\Column(type="boolean")
@@ -67,12 +67,12 @@ class Participants implements UserInterface//, \Serializable
     private $campus;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions", mappedBy="participant")
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="participant", cascade={"remove"})
      */
     private $inscriptions;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="organisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur", cascade={"remove"})
      */
     private $sorties;
 
@@ -171,12 +171,12 @@ class Participants implements UserInterface//, \Serializable
 
     public function getMotDePasse(): ?string
     {
-        return $this->mot_de_passe;
+        return $this->motDePasse;
     }
 
-    public function setMotDePasse(string $mot_de_passe): self
+    public function setMotDePasse(string $motDePasse): self
     {
-        $this->mot_de_passe = $mot_de_passe;
+        $this->motDePasse = $motDePasse;
 
         return $this;
     }
@@ -256,12 +256,12 @@ class Participants implements UserInterface//, \Serializable
 
     public function getPassword(): string
     {
-        return (string) $this->mot_de_passe;
+        return (string) $this->motDePasse;
     }
 
     public function setPassword(string $mot_de_passe): self
     {
-        $this->mot_de_passe = $mot_de_passe;
+        $this->motDePasse = $mot_de_passe;
 
         return $this;
     }

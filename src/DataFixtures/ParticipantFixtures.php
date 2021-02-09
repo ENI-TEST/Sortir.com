@@ -4,12 +4,12 @@
 namespace App\DataFixtures;
 
 
-use App\Entity\Participants;
+use App\Entity\Participant;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class ParticipantsFixtures extends Fixture
+class ParticipantFixtures extends Fixture
 {
 
     private $encoder;
@@ -24,7 +24,7 @@ class ParticipantsFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $participant = new Participants();
+        $participant = new Participant();
         $participant->setPseudo('admin');
         $participant->setNom('admin');
         $participant->setPrenom('admin');
@@ -36,7 +36,7 @@ class ParticipantsFixtures extends Fixture
         $manager->persist($participant);
         $manager->flush();
 
-        $participant = new Participants();
+        $participant = new Participant();
         $participant->setPseudo('toto');
         $participant->setNom('toto');
         $participant->setPrenom('toto');
@@ -48,7 +48,7 @@ class ParticipantsFixtures extends Fixture
         $manager->persist($participant);
         $manager->flush();
 
-        $participant = new Participants();
+        $participant = new Participant();
         $participant->setPseudo('tata');
         $participant->setNom('tata');
         $participant->setPrenom('tata');
@@ -60,7 +60,7 @@ class ParticipantsFixtures extends Fixture
         $manager->persist($participant);
         $manager->flush();
 
-        $participant = new Participants();
+        $participant = new Participant();
         $participant->setPseudo('titi');
         $participant->setNom('titi');
         $participant->setPrenom('titi');

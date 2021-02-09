@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\LieuxRepository;
+use App\Repository\LieuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LieuxRepository::class)
+ * @ORM\Entity(repositoryClass=LieuRepository::class)
  */
-class Lieux
+class Lieu
 {
     /**
      * @ORM\Id
@@ -21,7 +21,7 @@ class Lieux
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $nom_lieu;
+    private $nomLieu;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -39,12 +39,12 @@ class Lieux
     private $longitude;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="lieu")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="lieu", cascade={"remove"})
      */
     private $sorties;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Villes", inversedBy="lieux")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="lieux")
      */
     private $ville;
 
@@ -62,12 +62,12 @@ class Lieux
 
     public function getNomLieu(): ?string
     {
-        return $this->nom_lieu;
+        return $this->nomLieu;
     }
 
-    public function setNomLieu(string $nom_lieu): self
+    public function setNomLieu(string $nomLieu): self
     {
-        $this->nom_lieu = $nom_lieu;
+        $this->nomLieu = $nomLieu;
 
         return $this;
     }

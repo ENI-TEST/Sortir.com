@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\SortiesRepository;
+use App\Repository\SortieRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=SortiesRepository::class)
+ * @ORM\Entity(repositoryClass=SortieRepository::class)
  */
-class Sorties
+class Sortie
 {
     /**
      * @ORM\Id
@@ -30,7 +30,7 @@ class Sorties
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_debut;
+    private $dateDebut;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -40,30 +40,30 @@ class Sorties
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_cloture;
+    private $dateCloture;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $nb_inscriptions_max;
+    private $nbInscriptionsMax;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
      */
-    private $description_infos;
+    private $descriptionInfos;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $etat_sortie;
+    private $etatSortie;
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
      */
-    private $url_photo;
+    private $urlPhoto;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Participants", inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participant", inversedBy="sorties")
      */
     protected $organisateur;
 
@@ -73,17 +73,17 @@ class Sorties
     private $campus;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Etats", inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="sorties")
      */
     private $etat;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions", mappedBy="sortie", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="sortie", cascade={"remove"})
      */
     private $inscriptions;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Lieux", inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="sorties")
      */
     private $lieu;
 
@@ -115,12 +115,12 @@ class Sorties
 
     public function getDateDebut(): ?DateTimeInterface
     {
-        return $this->date_debut;
+        return $this->dateDebut;
     }
 
-    public function setDateDebut(DateTimeInterface $date_debut): self
+    public function setDateDebut(DateTimeInterface $dateDebut): self
     {
-        $this->date_debut = $date_debut;
+        $this->dateDebut = $dateDebut;
 
         return $this;
     }
@@ -139,60 +139,60 @@ class Sorties
 
     public function getDateCloture(): ?DateTimeInterface
     {
-        return $this->date_cloture;
+        return $this->dateCloture;
     }
 
-    public function setDateCloture(DateTimeInterface $date_cloture): self
+    public function setDateCloture(DateTimeInterface $dateCloture): self
     {
-        $this->date_cloture = $date_cloture;
+        $this->dateCloture = $dateCloture;
 
         return $this;
     }
 
     public function getNbInscriptionsMax(): ?int
     {
-        return $this->nb_inscriptions_max;
+        return $this->nbInscriptionsMax;
     }
 
-    public function setNbInscriptionsMax(int $nb_inscriptions_max): self
+    public function setNbInscriptionsMax(int $nbInscriptionsMax): self
     {
-        $this->nb_inscriptions_max = $nb_inscriptions_max;
+        $this->nbInscriptionsMax = $nbInscriptionsMax;
 
         return $this;
     }
 
     public function getDescriptionInfos(): ?string
     {
-        return $this->description_infos;
+        return $this->descriptionInfos;
     }
 
-    public function setDescriptionInfos(?string $description_infos): self
+    public function setDescriptionInfos(?string $descriptionInfos): self
     {
-        $this->description_infos = $description_infos;
+        $this->descriptionInfos = $descriptionInfos;
 
         return $this;
     }
 
     public function getEtatSortie(): ?int
     {
-        return $this->etat_sortie;
+        return $this->etatSortie;
     }
 
-    public function setEtatSortie(int $etat_sortie): self
+    public function setEtatSortie(int $etatSortie): self
     {
-        $this->etat_sortie = $etat_sortie;
+        $this->etatSortie = $etatSortie;
 
         return $this;
     }
 
     public function getUrlPhoto(): ?string
     {
-        return $this->url_photo;
+        return $this->urlPhoto;
     }
 
-    public function setUrlPhoto(?string $url_photo): self
+    public function setUrlPhoto(?string $urlPhoto): self
     {
-        $this->url_photo = $url_photo;
+        $this->urlPhoto = $urlPhoto;
 
         return $this;
     }
@@ -267,7 +267,7 @@ class Sorties
         $this->lieu = $lieu;
     }
 
-    public function checkIfInscrit(Participants $p): bool
+    public function checkIfInscrit(Participant $p): bool
     {
         return $this->inscriptions->exists(function($key, $inscription) use($p)
         {

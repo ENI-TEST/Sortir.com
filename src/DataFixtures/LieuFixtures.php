@@ -2,15 +2,15 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Lieux;
+use App\Entity\Lieu;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class LieuxFixtures extends Fixture
+class LieuFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $lieu = new Lieux();
+        $lieu = new Lieu();
         $lieu->setNomLieu('Poney Club de Bel Air');
         $lieu->setRue('641 rue de Bel Air');
         $lieu->setLatitude(46.37301010744507);
@@ -19,7 +19,7 @@ class LieuxFixtures extends Fixture
         $manager->persist($lieu);
         $manager->flush();
 
-        $lieu = new Lieux();
+        $lieu = new Lieu();
         $lieu->setNomLieu('Parc Chézine');
         $lieu->setRue('16 rue du Mississipi');
         $lieu->setLatitude(47.23963981831813);
@@ -28,7 +28,7 @@ class LieuxFixtures extends Fixture
         $manager->persist($lieu);
         $manager->flush();
 
-        $lieu = new Lieux();
+        $lieu = new Lieu();
         $lieu->setNomLieu('Château de Goulaine');
         $lieu->setRue('Allée du Château');
         $lieu->setLatitude(47.207407465617344);
@@ -37,7 +37,7 @@ class LieuxFixtures extends Fixture
         $manager->persist($lieu);
         $manager->flush();
 
-        $lieu = new Lieux();
+        $lieu = new Lieu();
         $lieu->setNomLieu('Stade de la Beaujoire');
         $lieu->setRue('Route de Saint-Joseph');
         $lieu->setLatitude(47.25723707515392);
@@ -46,7 +46,7 @@ class LieuxFixtures extends Fixture
         $manager->persist($lieu);
         $manager->flush();
 
-        $lieu = new Lieux();
+        $lieu = new Lieu();
         $lieu->setNomLieu('Forêt Adrénaline Rennes - Parc Aventure');
         $lieu->setRue('Rue du Professeur Maurice Audin');
         $lieu->setLatitude(48.13583150101859);
@@ -55,7 +55,7 @@ class LieuxFixtures extends Fixture
         $manager->persist($lieu);
         $manager->flush();
 
-        $lieu = new Lieux();
+        $lieu = new Lieu();
         $lieu->setNomLieu('La Grange des Gravelles EARL');
         $lieu->setRue('8 Bis Rue Ulger');
         $lieu->setLatitude(47.737219825512);
@@ -64,7 +64,7 @@ class LieuxFixtures extends Fixture
         $manager->persist($lieu);
         $manager->flush();
 
-        $lieu = new Lieux();
+        $lieu = new Lieu();
         $lieu->setNomLieu('Camping Manoir de Soeuvres');
         $lieu->setRue('Soeuvres');
         $lieu->setLatitude(48.076298244723056);
@@ -73,7 +73,7 @@ class LieuxFixtures extends Fixture
         $manager->persist($lieu);
         $manager->flush();
 
-        $lieu = new Lieux();
+        $lieu = new Lieu();
         $lieu->setNomLieu('Les Jardins du Château d\'Aiffres');
         $lieu->setRue('270 Rue de l\'Église');
         $lieu->setLatitude(46.285080370646654);
@@ -82,7 +82,7 @@ class LieuxFixtures extends Fixture
         $manager->persist($lieu);
         $manager->flush();
 
-        $lieu = new Lieux();
+        $lieu = new Lieu();
         $lieu->setNomLieu('Maison du Marais Poitevin');
         $lieu->setRue('5 Place de la Coutume');
         $lieu->setLatitude(46.32277642900861);

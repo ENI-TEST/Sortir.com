@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Etats;
-use App\Entity\Inscriptions;
-use App\Entity\Participants;
-use App\Entity\Sorties;
+use App\Entity\Etat;
+use App\Entity\Inscription;
+use App\Entity\Participant;
+use App\Entity\Sortie;
 use App\Form\AnnulationSortieType;
 use App\Form\CreationSortieType;
 use App\Form\ModifSortieType;
@@ -23,16 +23,16 @@ class SortieController extends AbstractController
     public function creationSortie(EntityManagerInterface $em, Request $request): Response
     {
         $username = $this->getUser()->getUsername();
-        $organisateur = $this->getDoctrine()->getRepository(Participants::class)
+        $organisateur = $this->getDoctrine()->getRepository(Participant::class)
             ->findOneByPseudoOrEmail($username);
 
-        $sortie = new Sorties();
+        $sortie = new Sortie();
         $sortie->setOrganisateur($organisateur);
-        $inscription = new Inscriptions();
+        $inscription = new Inscription();
         $inscription->setDateInscription(new \DateTime());
         $inscription->setSortie($sortie);
         $inscription->setParticipant($organisateur);
-        $etat = $this->getDoctrine()->getRepository(Etats::class)->findOneBy(['libelle'=>'Créée']);
+        $etat = $this->getDoctrine()->getRepository(Etat::class)->findOneBy(['libelle'=>'Créée']);
         $sortie->setEtat($etat);
         $sortieForm = $this->createForm(CreationSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
@@ -58,7 +58,7 @@ class SortieController extends AbstractController
      */
     public function annulationSortie(EntityManagerInterface $em, Request $request, $id): Response
     {
-        $sortie = $this->getDoctrine()->getRepository(Sorties::class)->find($id);
+        $sortie = $this->getDoctrine()->getRepository(Sortie::class)->find($id);
         if(empty($sortie)){
             throw $this->createNotFoundException('Cette sortie n\'existe pas');
         }
@@ -68,7 +68,7 @@ class SortieController extends AbstractController
         /*$dateNow = new \DateTime();
         if($sortie->getDateCloture() > $dateNow){*/
             if($annulationForm->isSubmitted() && $annulationForm->isValid()){
-                $etat = $this->getDoctrine()->getRepository(Etats::class)
+                $etat = $this->getDoctrine()->getRepository(Etat::class)
                     ->findOneBy(['libelle'=>'Annulée']);
                 $sortie->setEtat($etat);
                 $em->persist($sortie);
@@ -93,14 +93,14 @@ class SortieController extends AbstractController
     public function modifSortie(EntityManagerInterface $em, Request $request, $id): Response
     {
 
-        $sortie = $this->getDoctrine()->getRepository(Sorties::class)->find($id);
+        $sortie = $this->getDoctrine()->getRepository(Sortie::class)->find($id);
         if(empty($sortie)){
             throw $this->createNotFoundException('Cette sortie n\'existe pas');
         }
         $modifForm = $this->createForm(ModifSortieType::class, $sortie);
         $modifForm->handleRequest($request);
         if($modifForm->isSubmitted() && $modifForm->isValid()){
-            $etat = $this->getDoctrine()->getRepository(Etats::class)->findOneBy(['libelle'=>'Créée']);
+            $etat = $this->getDoctrine()->getRepository(Etat::class)->findOneBy(['libelle'=>'Créée']);
             $sortie->setEtat($etat);
             $em->persist($sortie);
             $em->flush();
@@ -120,7 +120,7 @@ class SortieController extends AbstractController
      */
     public function suppressionSortie(EntityManagerInterface$em, Request $request, $id):Response
     {
-        $sortie=$this->getDoctrine()->getRepository(Sorties::class)->find($id);
+        $sortie=$this->getDoctrine()->getRepository(Sortie::class)->find($id);
         if(empty($sortie)){
             throw$this->createNotFoundException('Cette sortie n\'existe pas');
         }

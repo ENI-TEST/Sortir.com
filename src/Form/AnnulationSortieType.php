@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Campus;
-use App\Entity\Lieux;
-use App\Entity\Sorties;
+use App\Entity\Lieu;
+use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
@@ -37,12 +37,12 @@ class AnnulationSortieType extends AbstractType
             ])
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
-                'choice_label' => 'nom_campus',
+                'choice_label' => 'nomCampus',
                 'attr' => ['readonly' => true,
                 ]])
             ->add('lieu', EntityType::class, [
-                'class' => Lieux::class,
-                'choice_label' => 'nom_lieu',
+                'class' => Lieu::class,
+                'choice_label' => 'nomLieu',
                 'attr' => ['readonly' => true,
                 ]])
         ;
@@ -51,7 +51,7 @@ class AnnulationSortieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Sorties::class,
+            'data_class' => Sortie::class,
         ]);
     }
 }

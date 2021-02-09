@@ -21,16 +21,16 @@ class Campus
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $nom_campus;
+    private $nomCampus;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participants", mappedBy="campus")
+     * @ORM\OneToMany(targetEntity="App\Entity\Participant", mappedBy="campus", cascade={"remove"})
      * @var ArrayCollection
      */
     private $participants;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="campus")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="campus", cascade={"remove"})
      */
     private $sorties;
 
@@ -47,12 +47,12 @@ class Campus
 
     public function getNomCampus(): ?string
     {
-        return $this->nom_campus;
+        return $this->nomCampus;
     }
 
-    public function setNomCampus(string $nom_campus): self
+    public function setNomCampus(string $nomCampus): self
     {
-        $this->nom_campus = $nom_campus;
+        $this->nomCampus = $nomCampus;
 
         return $this;
     }
