@@ -26,14 +26,10 @@ class MainController extends AbstractController
         $sortiesRepo = $this->getDoctrine()->getRepository(Sortie::class);
         //$toutesLesSorties = $this->getDoctrine()->getRepository(Sortie::class)->findAll();
         $sorties= $sortiesRepo->findSorties($sortieDataSearch, $participant);
-        /*$campus = $this->getDoctrine()->getRepository(Campus::class)
-            ->findAll();*/
 
         return $this->render('main/home.html.twig', [
             'controller_name' => 'MainController',
-            //'campus' => $campus,
             'sorties' => $sorties,
-            //'toutesLesSorties' => $toutesLesSorties,
             'participant' => $participant,
             'sortieSearchForm' => $sortieSearchForm->createView()
         ]);
