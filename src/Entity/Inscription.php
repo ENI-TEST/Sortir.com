@@ -3,11 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\InscriptionRepository;
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=InscriptionsRepository::class)
+ * @ORM\Entity(repositoryClass=InscriptionRepository::class)
  */
 class Inscription
 {
@@ -55,7 +54,6 @@ class Inscription
         $this->dateInscription = $dateInscription;
     }
 
-
     /**
      * @return mixed
      */
@@ -87,8 +85,6 @@ class Inscription
     {
         $this->participant = $participant;
     }
-
-
 
 
 }

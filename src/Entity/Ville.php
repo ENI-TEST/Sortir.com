@@ -21,7 +21,7 @@ class Ville
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $nom_ville;
+    private $nomVille;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -29,7 +29,7 @@ class Ville
     private $codePostal;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="ville")
+     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="ville", cascade={"remove"})
      */
     private $lieux;
 
@@ -46,14 +46,12 @@ class Ville
 
     public function getNomVille(): ?string
     {
-        return $this->nom_ville;
+        return $this->nomVille;
     }
 
-    public function setNomVille(string $nom_ville): self
+    public function setNomVille(string $nomVille)
     {
-        $this->nom_ville = $nom_ville;
-
-        return $this;
+        $this->nomVille = $nomVille;
     }
 
     /**
@@ -71,7 +69,6 @@ class Ville
     {
         $this->codePostal = $codePostal;
     }
-
 
     /**
      * @return ArrayCollection

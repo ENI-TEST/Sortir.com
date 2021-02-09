@@ -9,7 +9,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
  * @method Sortie|null findOneBy(array $criteria, array $orderBy = null)
@@ -26,26 +25,25 @@ class SortieRepository extends ServiceEntityRepository
     public function findSorties(SortieSearchData $searchData, UserInterface $participant)
     {
 
-            $qb = $this
-                ->createQueryBuilder('s')
-                ->innerJoin('s.etat', 'e')
-                ->innerJoin('s.organisateur', 'p')
-                ->innerJoin('s.campus','c')
-                ->innerJoin('s.lieu', 'l')
-                ->innerJoin('l.ville', 'v')
-                ->leftJoin('s.inscriptions', 'i')
-                ->leftJoin('i.participant', 'p2')
-                ->addSelect('i')
-                ->addSelect('p2')
+        $qb = $this
+            ->createQueryBuilder('s')
+            ->innerJoin('s.etat', 'e')
+            ->innerJoin('s.organisateur', 'p')
+            ->innerJoin('s.campus','c')
+            ->innerJoin('s.lieu', 'l')
+            ->innerJoin('l.ville', 'v')
+            ->leftJoin('s.inscriptions', 'i')
+            ->leftJoin('i.participant', 'p2')
+            ->addSelect('i')
+            ->addSelect('p2')
         ;
 
-
-         if(!empty($searchData->getMotCle())){
-             $qb = $qb
-             ->andWhere('s.nom LIKE :motCle')
-             ->setParameter('motCle', "%{$searchData->getMotCle()}")
-             ;
-         }
+        if(!empty($searchData->getMotCle())){
+            $qb = $qb
+                ->andWhere('s.nom LIKE :motCle')
+                ->setParameter('motCle', "%{$searchData->getMotCle()}")
+            ;
+        }
 
         if(!empty($searchData->getNomCampus())){
             $qb = $qb
@@ -65,7 +63,7 @@ class SortieRepository extends ServiceEntityRepository
 
         if(!empty($searchData->isSortieOrganisateur()) && $searchData->isSortieOrganisateur() === true){
 
-              $qb = $qb
+            $qb = $qb
                 ->andWhere('p.id =  :organisateur')
                 ->setParameter('organisateur', $participant)
             ;
@@ -104,6 +102,7 @@ class SortieRepository extends ServiceEntityRepository
 
         return new Paginator($query) ;
     }
+
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */

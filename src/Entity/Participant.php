@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @UniqueEntity(fields={"pseudo", "email"})
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participant implements UserInterface//, \Serializable
+class Participant implements UserInterface
 {
     /**
      * @ORM\Id
@@ -67,12 +67,12 @@ class Participant implements UserInterface//, \Serializable
     private $campus;
 
     /**
-     * @ORM\OneToMany (targetEntity="App\Entity\Inscription", mappedBy="participant")
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="participant", cascade={"remove"})
      */
     private $inscriptions;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur", cascade={"remove"})
      */
     private $sorties;
 

@@ -24,13 +24,13 @@ class Campus
     private $nomCampus;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participant", mappedBy="campus")
+     * @ORM\OneToMany(targetEntity="App\Entity\Participant", mappedBy="campus", cascade={"remove"})
      * @var ArrayCollection
      */
     private $participants;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="campus")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="campus", cascade={"remove"})
      */
     private $sorties;
 

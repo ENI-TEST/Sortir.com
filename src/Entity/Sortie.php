@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\SortieRepository;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -78,7 +77,7 @@ class Sortie
     private $etat;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="sortie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="sortie", cascade={"remove"})
      */
     private $inscriptions;
 
@@ -288,18 +287,12 @@ class Sortie
         $this->etat = $etat;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getInscriptions(): ArrayCollection
+    public function getInscriptions()
     {
         return $this->inscriptions;
     }
 
-    /**
-     * @param ArrayCollection $inscriptions
-     */
-    public function setInscriptions(ArrayCollection $inscriptions): void
+    public function setInscriptions($inscriptions): void
     {
         $this->inscriptions = $inscriptions;
     }
@@ -320,6 +313,12 @@ class Sortie
         $this->lieu = $lieu;
     }
 
-
+    public function checkIfInscrit(Participant $p): bool
+    {
+        return $this->inscriptions->exists(function($key, $inscription) use($p)
+        {
+            return ($inscription->getParticipant() == $p);
+        });
+    }
 
 }

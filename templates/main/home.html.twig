@@ -3,15 +3,11 @@
 {% form_theme sortieSearchForm 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('sortie_creation') }}">Créer une sortie</a>
-    <a href="{{ path('app_logout') }}">Logout</a>
 
     <div class="col-sm-3 offset-sm-9 text-right">
         <p>Date du jour : {{ "now" | date('d/m/Y') }}</p>
         <p>Participant : {{ participant.prenom }} {{ participant.nom | upper }}</p>
     </div>
-
-    <h1 class="text-center">test</h1>
 
     <div class="container">
         <div class="row">
@@ -52,11 +48,27 @@
                     <td>{{ sortie.nom }}</td>
                     <td>{{ sortie.dateDebut | date('d/m/Y H:i') }}</td>
                     <td>{{ sortie.dateCloture | date('d/m/Y H:i') }}</td>
-                    <td>X/{{ sortie.nbInscriptionsMax }}</td>
-                    <td>{{ sortie.etat.libelle }}</td>
-                    <td>Etat à définir</td>
+                    <td>{{ sortie.inscriptions.count | default('0')}}/{{ sortie.nbInscriptionsMax }}</td>
+                    <td>{{ sortie.etat.libelle | default('pas défini') }}</td>
+                    <td>{% for inscrit in sortie.inscriptions %}
+                            <a href="">{{ inscrit.participant.prenom }} {{ inscrit.participant.nom | upper }}</a>
+                        {% endfor %}
+                    </td>
                     <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom | upper }}</td>
-                    <td>Actions à définir</td>
+                    <td>
+                        <a href="">Afficher - </a>
+                        {% if participant.prenom == sortie.organisateur.prenom
+                            and participant.nom == sortie.organisateur.nom %}
+                            <a href="{{ path('sortie_modif',{'id': sortie.id}) }}">Modifier - </a>
+                            <a href="{{ path('sortie_publier',{'id': sortie.id}) }}">Publier - </a>
+                            <a href="{{ path('sortie_annulation', {'id': sortie.id}) }}">Annuler - </a>
+                        {% endif %}
+                        {% if not sortie.checkIfInscrit(participant) %}
+                            <a href="">S'inscrire</a>
+                        {% else %}
+                            <a href="">Se désister</a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>
@@ -65,7 +77,6 @@
             <a href="{{ path('sortie_creation') }}" class="text-decoration-none">
                 <button class="btn btn-primary btn-lg btn-block">Créer une sortie</button></a>
         </div>
-
     </div>
 
 {% endblock %}
