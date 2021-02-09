@@ -12,20 +12,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ParticipantController extends AbstractController
 {
-    /**
-     * @Route("/participant", name="participant")
-     */
-    public function index(): Response
-    {
-        return $this->render('participant/index.html.twig', [
-            'controller_name' => 'ParticipantController',
-        ]);
-    }
 
     /**
-     * @Route("/afficher", name="afficher")
+     * @Route("/afficherProfilParticipant", name="profilParticipant")
      */
-    public function afficher(): Response
+    public function afficherProfilParticipant(): Response
     {
 
 
@@ -34,15 +25,15 @@ class ParticipantController extends AbstractController
 
 
 
-        return $this->render('afficherProfil/afficher.html.twig', [
+        return $this->render('participant/afficherProfilParticipant.html.twig', [
             'user' => $user,
         ]);
     }
 
     /**
-     * @Route("/profil", name="profil")
+     * @Route("/afficherProfilUser", name="profilUser")
      */
-    public function profil(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $em): Response
+    public function afficherProfilUser(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $em): Response
     {
 
         $participant = $this->getUser();
@@ -63,7 +54,7 @@ class ParticipantController extends AbstractController
         }
 
 
-        return $this->render('monProfil/profil.html.twig', [
+        return $this->render('participant/afficherProfilUser.html.twig', [
             'participantForm' => $participantForm->createView(),
         ]);
 
