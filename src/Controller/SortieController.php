@@ -152,5 +152,21 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
+    /**
+     * @Route("afficherSortie/{id}", name="sortie_afficher")
+     */
+    public function afficherSortie($id): Response
+    {
+        $sortie=$this->getDoctrine()->getRepository(Sortie::class)->find($id);
+        if(empty($sortie)){
+            throw$this->createNotFoundException('Cette sortie n\'existe pas');
+        }
+
+        return $this->render('sortie/afficher_sortie.html.twig', [
+            'controller_name' => 'SortieController',
+            'sortie' => $sortie,
+        ]);
+    }
+
 
 }

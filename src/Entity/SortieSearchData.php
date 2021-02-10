@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class SortieSearchData
 {
     /**
-     * @var Campus
+     * @var string | null
      */
     private $nomCampus = '';
 
@@ -48,7 +48,7 @@ class SortieSearchData
     private $sortiePassees = false;
 
     /**
-     * @return \App\Entity\Campus
+     * @return string
      */
     public function getNomCampus()
     {
@@ -56,7 +56,7 @@ class SortieSearchData
     }
 
     /**
-     * @param \App\Entity\Campus $nomCampus
+     * @param string $nomCampus
      */
     public function setNomCampus($nomCampus): void
     {
@@ -78,8 +78,6 @@ class SortieSearchData
     {
         $this->motCle = $motCle;
     }
-
-
 
     /**
      * @return mixed
@@ -176,9 +174,5 @@ class SortieSearchData
     {
         $this->sortiePassees = $sortiePassees;
     }
-
-
-
-
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Form\MonProfilType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,16 +15,15 @@ class ParticipantController extends AbstractController
 {
 
     /**
-     * @Route("/afficherProfilParticipant", name="profilParticipant")
+     * @Route("/afficherProfilParticipant/{id}", name="profilParticipant")
      */
-    public function afficherProfilParticipant(): Response
+    public function afficherProfilParticipant($id): Response
     {
-
-
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
-
-
+        $user = $this->getDoctrine()->getRepository(Participant::class)->find($id);
+        if(empty($user)){
+            throw $this->createNotFoundException('Ce participant n\'existe pas');
+        }
 
         return $this->render('participant/afficherProfilParticipant.html.twig', [
             'user' => $user,
