@@ -64,7 +64,9 @@
                             <a href="{{ path('sortie_annulation', {'id': sortie.id}) }}">Annuler - </a>
                         {% endif %}
                         {% if not sortie.checkIfInscrit(participant) %}
-                            <a href="">S'inscrire</a>
+                            {% if date() < date(sortie.dateCloture) and not sortie.etat.libelle is same as("Créée")  %}
+                                <a href="">S'inscrire</a>
+                            {% endif %}
                         {% else %}
                             <a href="">Se désister</a>
                         {% endif %}
