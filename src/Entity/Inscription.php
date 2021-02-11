@@ -24,11 +24,13 @@ class Inscription
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Sortie", inversedBy="inscriptions")
+     * ORM\JoinColumn(nullable=false)
      */
     private $sortie;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Participant", inversedBy="inscriptions")
+     * ORM\JoinColumn(nullable=false)
      */
     private $participant;
 

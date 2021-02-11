@@ -63,11 +63,13 @@ class Participant implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="participants")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Inscription", mappedBy="participant", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $inscriptions;
 
@@ -222,9 +224,20 @@ class Participant implements UserInterface
     /**
      * @param ArrayCollection $inscriptions
      */
-    public function setInscriptions(ArrayCollection $inscriptions): void
+    public function setInscriptions(ArrayCollection $inscriptions): self
     {
         $this->inscriptions = $inscriptions;
+    }
+
+
+    public function addInscription(Inscription $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions[] = $inscription;
+            $inscription->setParticipant($this);
+        }
+
+        return $this;
     }
 
     /**
