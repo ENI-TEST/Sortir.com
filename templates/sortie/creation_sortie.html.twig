@@ -25,11 +25,71 @@
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-sm-6 offset-sm-3">
-            <a href="{{ path('sortie_creation') }}"><button type="submit" class="btn btn-success mr-5" formnovalidate>Enregistrer</button></a>
-            <a href="{{ path('home') }}"><button type="submit" class="btn btn-danger ml-5" formnovalidate>Annuler</button></a>
+        <div class="col-sm-4 offset-sm-3">
+            <a href="{{ path('sortie_creation') }}"><button type="submit" class="btn btn-success btn-lg mr-5" formnovalidate>Enregistrer</button></a>
+        </div>
+        <div class="col-sm-4">
+            <a href="{{ path('home') }}"><button type="submit" class="btn btn-danger btn-lg ml-5" formnovalidate>Annuler</button></a>
             {{ form_end(sortieForm) }}
         </div>
     </div>
+    <script>
+        var $ville = $('#creation_sortie_ville');
+        $ville.change(function(){
+            $.ajax({
+                url: "{{ path('sortie_liste_lieux') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    "villeId": $ville.val(),
+                },
+                success: function(lieux) {
 
+                    var lieuSelect = $('#creation_sortie_lieu');
+                    lieuSelect.html('');
+                    lieuSelect.append('<option value> Choisissez un lieu de '
+                        + $ville.find("option:selected").text()
+                        + ' ...</option>');
+                    $.each(lieux, function(key, lieu){
+                        lieuSelect.append('<option value="' + lieu.id + '">' + lieu.name + '</option>');
+                        var cdpSelect = $('#creation_sortie_code_postal');
+                        cdpSelect.html('');
+                        cdpSelect.val(this.cdp);
+                        console.log(this);
+                    });
+                },
+                error: function(err){
+                    alert("Une erreur s'est produite en chargeant les données...");
+                }
+            });
+        });
+
+        var $lieu = $('#creation_sortie_lieu');
+        $lieu.change(function(){
+            $.ajax({
+                url: "{{ path('sortie_lieu_details') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    "lieuId": $lieu.val()
+                },
+                success: function(retourArray) {
+                    $.each(retourArray, function(key, valeur){
+                        var rueSelect = $('#creation_sortie_Rue');
+                        rueSelect.html('');
+                        rueSelect.val(valeur.rue);
+                        var latitudeSelect = $('#creation_sortie_latitude');
+                        latitudeSelect.html('');
+                        latitudeSelect.val(valeur.latitude);
+                        var longitudeSelect = $('#creation_sortie_longitude');
+                        longitudeSelect.html('');
+                        longitudeSelect.val(valeur.longitude);
+                    });
+                },
+                error: function(err){
+                    alert("Une erreur s'est produite en chargeant les données...");
+                }
+            });
+        });
+    </script>
 {% endblock %}

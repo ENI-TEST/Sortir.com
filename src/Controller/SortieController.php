@@ -4,13 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Etat;
 use App\Entity\Inscription;
+use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Form\AnnulationSortieType;
 use App\Form\CreationSortieType;
 use App\Form\ModifSortieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -166,6 +169,57 @@ class SortieController extends AbstractController
             'controller_name' => 'SortieController',
             'sortie' => $sortie,
         ]);
+    }
+
+    /**
+     * @Route("listeLieuxParVille", name="sortie_liste_lieux")
+     */
+    public function listeLieuxParVille(Request $request): JsonResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $lieuxRepo = $em->getRepository(Lieu::class);
+
+        $villeId = $request->query->get('villeId');
+        $ville = $em->getRepository(Ville::class)->find($villeId);
+        $cdp = $ville->getCodePostal();
+
+        $lieux = $lieuxRepo->findLieuByVille($villeId);
+
+        $responseArray = array();
+        foreach ($lieux as $lieu){
+            $responseArray[] = array(
+                "id" => $lieu->getId(),
+                "name" => $lieu->getNomLieu(),
+                "rue" => $lieu->getRue(),
+                "latitude" => $lieu->getLatitude(),
+                "longitude" => $lieu->getLongitude(),
+                "cdp" => $cdp,
+            );
+        }
+        return new JsonResponse($responseArray);
+    }
+
+    /**
+     * @Route("lieuDetails", name="sortie_lieu_details")
+     */
+    public function lieuDetails(Request $request): JsonResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $lieuRepo = $em->getRepository(Lieu::class);
+        $lieuId = $request->query->get('lieuId');
+        $lieu = $lieuRepo->find($lieuId);
+
+        $retourArray = array();
+
+        $retourArray[] = array(
+            "id" => $lieu->getId(),
+            "name" => $lieu->getNomLieu(),
+            "rue" => $lieu->getRue(),
+            "latitude" => $lieu->getLatitude(),
+            "longitude" => $lieu->getLongitude(),
+        );
+
+        return new JsonResponse($retourArray);
     }
 
 
