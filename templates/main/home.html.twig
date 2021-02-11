@@ -4,7 +4,6 @@
 
 {% block body %}
 
-
     <div class="col-sm-3 offset-sm-9 text-right">
         <p>Date du jour : {{ "now" | date('d/m/Y') }}</p>
         <p>Participant : {{ participant.prenom }} {{ participant.nom | upper }}</p>
@@ -64,10 +63,14 @@
                             and participant.nom == sortie.organisateur.nom %}
                             <a href="{{ path('sortie_modif',{'id': sortie.id}) }}">Modifier - </a>
                             <a href="{{ path('sortie_publier',{'id': sortie.id}) }}">Publier - </a>
-                            <a href="{{ path('sortie_annulation', {'id': sortie.id}) }}">Annuler - </a>
+                            {% if date() < date(sortie.dateCloture) and sortie.etat.libelle is same as("Ouverte")%}
+                                <a href="{{ path('sortie_annulation', {'id': sortie.id}) }}">Annuler - </a>
+                            {% endif %}
                         {% endif %}
                         {% if not sortie.checkIfInscrit(participant) %}
-                            <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
+                            {% if date() < date(sortie.dateCloture) and not sortie.etat.libelle is same as("Créée")  %}
+                                <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
+                            {% endif %}
                         {% else %}
                             <a href="{{ path('sortie_desister', {'id': sortie.id}) }}">Se désister</a>
                         {% endif %}

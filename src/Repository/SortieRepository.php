@@ -92,6 +92,25 @@ class SortieRepository extends ServiceEntityRepository
             ;
         }
 
+       if(!empty($searchData->isSortiePassees()) && !empty($searchData->isSortieNonInscrit())
+                 && !empty($searchData->isSortieOrganisateur()) && !empty($searchData->isSortieInscrit())){
+
+            $qb = $this
+                ->createQueryBuilder('s')
+                ->innerJoin('s.etat', 'e')
+                ->innerJoin('s.organisateur', 'p')
+                ->innerJoin('s.campus','c')
+                ->innerJoin('s.lieu', 'l')
+                ->innerJoin('l.ville', 'v')
+                ->leftJoin('s.inscriptions', 'i')
+                ->leftJoin('i.participant', 'p2')
+                ->addSelect('i')
+                ->addSelect('p2')
+            ;
+
+        }
+
+
         $query = $qb->getQuery();
 
         return new Paginator($query) ;
