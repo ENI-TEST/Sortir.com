@@ -4,13 +4,18 @@
 
 {% block body %}
 
-    <div class=" container w-50" >
+    <div class="col-sm-6 offset-sm-3" >
         <h2 class="text-center">Mon profil</h2>
         {{ form_start(participantForm)  }}
         {{ form_widget(participantForm) }}
-
-        <button type="submit" class="btn btn-success">Enregistrer</button>
-        <button type="submit" formnovalidate class="btn btn-danger">Annuler</button>
-        {{ form_end(participantForm) }}
+    </div>
+    <div class="row col-sm-6 offset-sm-3 mt-3">
+        <div class="col-4 offset-2">
+            <button type="submit" class="btn btn-success btn-lg" formnovalidate>Enregistrer</button>
+            {{ form_end(participantForm) }}
+        </div>
+        <div class="col-4">
+            <a href="{{ path('home') }}" class="btn btn-danger btn-lg">Annuler</a>
+        </div>
     </div>
 {% endblock %}

@@ -34,6 +34,7 @@ class SortieController extends AbstractController
 
         $sortie = new Sortie();
         $sortie->setOrganisateur($organisateur);
+        $sortie->setCampus($organisateur->getCampus());
         $inscription = new Inscription();
         $inscription->setDateInscription(new \DateTime());
         $inscription->setSortie($sortie);

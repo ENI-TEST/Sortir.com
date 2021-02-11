@@ -55,7 +55,65 @@
         </div>
     </div>
 
+    <script>
+        var $ville = $('#modif_sortie_ville');
+        $ville.change(function(){
+            $.ajax({
+                url: "{{ path('sortie_liste_lieux') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    "villeId": $ville.val(),
+                },
+                success: function(lieux) {
 
+                    var lieuSelect = $('#modif_sortie_lieu');
+                    lieuSelect.html('');
+                    lieuSelect.append('<option value> Choisissez un lieu de '
+                        + $ville.find("option:selected").text()
+                        + ' ...</option>');
+                    $.each(lieux, function(key, lieu){
+                        lieuSelect.append('<option value="' + lieu.id + '">' + lieu.name + '</option>');
+                        var cdpSelect = $('#modif_sortie_code_postal');
+                        cdpSelect.html('');
+                        cdpSelect.val(this.cdp);
+                        console.log(this);
+                    });
+                },
+                error: function(err){
+                    alert("Une erreur s'est produite en chargeant les données...");
+                }
+            });
+        });
+
+        var $lieu = $('#modif_sortie_lieu');
+        $lieu.change(function(){
+            $.ajax({
+                url: "{{ path('sortie_lieu_details') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    "lieuId": $lieu.val()
+                },
+                success: function(retourArray) {
+                    $.each(retourArray, function(key, valeur){
+                        var rueSelect = $('#modif_sortie_Rue');
+                        rueSelect.html('');
+                        rueSelect.val(valeur.rue);
+                        var latitudeSelect = $('#modif_sortie_latitude');
+                        latitudeSelect.html('');
+                        latitudeSelect.val(valeur.latitude);
+                        var longitudeSelect = $('#modif_sortie_longitude');
+                        longitudeSelect.html('');
+                        longitudeSelect.val(valeur.longitude);
+                    });
+                },
+                error: function(err){
+                    alert("Une erreur s'est produite en chargeant les données...");
+                }
+            });
+        });
+    </script>
 
 {% endblock %}
 

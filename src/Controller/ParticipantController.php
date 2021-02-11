@@ -50,9 +50,7 @@ class ParticipantController extends AbstractController
 
             $this->addFlash('message', 'Votre profil a bien été génére');
             return $this->redirectToRoute('home');
-
         }
-
 
         return $this->render('participant/afficherProfilUser.html.twig', [
             'participantForm' => $participantForm->createView(),

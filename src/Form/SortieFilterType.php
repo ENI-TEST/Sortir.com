@@ -19,7 +19,7 @@ class SortieFilterType extends AbstractType
         $builder
             ->add('nomCampus', EntityType::class, [
                 'class' => Campus::class,
-                'label' => 'Campus',
+                'label' => 'Campus :',
                 'choice_label' => 'nom_campus'
             ])
 
@@ -32,35 +32,35 @@ class SortieFilterType extends AbstractType
             ])
 
             ->add('dateDebutSearch', DateTimeType::class, [
-                'label' => 'Entre ',
+                'label' => 'Entre le :',
                 'required' => false,
                 'widget' => 'single_text',
             ])
             ->add('dateFinSearch', DateTimeType::class, [
-                'label' => ' et ',
+                'label' => ' et le :',
                 'required' => false,
                 'widget' => 'single_text',
 
             ])
 
             ->add('sortieOrganisateur', CheckboxType::class, [
-                'label' =>  'Sortie dont je suis organisateur',
+                'label' =>  'Sorties dont je suis organisateur',
                 'required' => false,
 
             ])
 
             ->add('sortieInscrit', CheckboxType::class, [
-                'label' =>  'Sortie auxquelles je suis inscrit/e',
+                'label' =>  'Sorties auxquelles je suis inscrit/e',
                 'required' => false,
             ])
 
             ->add('sortieNonInscrit', CheckboxType::class, [
-                'label' =>  'Sortie auxquelles je ne suis pas inscrit/e',
+                'label' =>  'Sorties auxquelles je ne suis pas inscrit/e',
                 'required' => false,
             ])
 
             ->add('sortiePassees', CheckboxType::class, [
-                'label' =>  'Sortie passées',
+                'label' =>  'Sorties passées',
                 'required' => false,
             ])
         ;
