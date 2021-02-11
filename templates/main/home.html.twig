@@ -61,7 +61,9 @@
                             and participant.nom == sortie.organisateur.nom %}
                             <a href="{{ path('sortie_modif',{'id': sortie.id}) }}">Modifier - </a>
                             <a href="{{ path('sortie_publier',{'id': sortie.id}) }}">Publier - </a>
-                            <a href="{{ path('sortie_annulation', {'id': sortie.id}) }}">Annuler - </a>
+                            {% if date() < date(sortie.dateCloture) and sortie.etat.libelle is same as("Ouverte")%}
+                                <a href="{{ path('sortie_annulation', {'id': sortie.id}) }}">Annuler - </a>
+                            {% endif %}
                         {% endif %}
                         {% if not sortie.checkIfInscrit(participant) %}
                             {% if date() < date(sortie.dateCloture) and not sortie.etat.libelle is same as("Créée")  %}
