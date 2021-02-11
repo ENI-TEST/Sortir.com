@@ -29,12 +29,10 @@
             <a href="{{ path('sortie_modif',{'id': sortie.id}) }}">
                 <button type="submit" class="btn btn-success my-3 ml-3"
                         formnovalidate>Enregistrer</button></a>
+            {{ form_end(modifForm) }}
         </div>
         <div class="col">
-            <a href="{{ path('home') }}">
-                <button type="submit" class="btn btn-light my-3 ml-3"
-                        formnovalidate>Annuler</button></a>
-            {{ form_end(modifForm) }}
+            <a href="{{ path('home') }}" class="btn btn-light my-3 ml-3">Annuler</a>
         </div>
         <div class="col">
             <form method="post" action="{{ path('sortie_publier',{'id': sortie.id}) }}">
