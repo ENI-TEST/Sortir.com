@@ -47,8 +47,8 @@ class LieuFixtures extends Fixture
         $manager->flush();
 
         $lieu = new Lieu();
-        $lieu->setNomLieu('Forêt Adrénaline Rennes - Parc Aventure');
-        $lieu->setRue('Rue du Professeur Maurice Audin');
+        $lieu->setNomLieu('Forêt  - Parc Aventure');
+        $lieu->setRue('Rue Maurice Audin');
         $lieu->setLatitude(48.13583150101859);
         $lieu->setLongitude(-1.6467601717105513);
         //$lieu->setVille('La Bellangerais');
@@ -74,7 +74,7 @@ class LieuFixtures extends Fixture
         $manager->flush();
 
         $lieu = new Lieu();
-        $lieu->setNomLieu('Les Jardins du Château d\'Aiffres');
+        $lieu->setNomLieu('Les Jardins  d\'Aiffres');
         $lieu->setRue('270 Rue de l\'Église');
         $lieu->setLatitude(46.285080370646654);
         $lieu->setLongitude(-0.415820718351213);

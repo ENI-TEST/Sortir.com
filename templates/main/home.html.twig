@@ -64,9 +64,9 @@
                             <a href="{{ path('sortie_annulation', {'id': sortie.id}) }}">Annuler - </a>
                         {% endif %}
                         {% if not sortie.checkIfInscrit(participant) %}
-                            <a href="">S'inscrire</a>
+                            <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
                         {% else %}
-                            <a href="">Se désister</a>
+                            <a href="{{ path('sortie_desister', {'id': sortie.id}) }}">Se désister</a>
                         {% endif %}
                     </td>
                 </tr>

@@ -19,6 +19,9 @@ class SortieController extends AbstractController
 {
     /**
      * @Route("/creationSortie", name="sortie_creation")
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return Response
      */
     public function creationSortie(EntityManagerInterface $em, Request $request): Response
     {
@@ -55,6 +58,10 @@ class SortieController extends AbstractController
 
     /**
      * @Route("annulationSortie/{id}", name="sortie_annulation")
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param $id
+     * @return Response
      */
     public function annulationSortie(EntityManagerInterface $em, Request $request, $id): Response
     {
@@ -89,6 +96,10 @@ class SortieController extends AbstractController
 
     /**
      * @Route("modifSortie/{id}", name="sortie_modif")
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param $id
+     * @return Response
      */
     public function modifSortie(EntityManagerInterface $em, Request $request, $id): Response
     {
@@ -116,9 +127,13 @@ class SortieController extends AbstractController
     }
 
     /**
-     *@Route("suppressionSortie/{id}",name="sortie_suppression", methods={"DELETE"})
+     * @Route("suppressionSortie/{id}",name="sortie_suppression", methods={"DELETE"})
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param $id
+     * @return Response
      */
-    public function suppressionSortie(EntityManagerInterface$em, Request $request, $id):Response
+    public function suppressionSortie(EntityManagerInterface $em, Request $request, $id):Response
     {
         $sortie=$this->getDoctrine()->getRepository(Sortie::class)->find($id);
         if(empty($sortie)){
@@ -135,6 +150,9 @@ class SortieController extends AbstractController
 
     /**
      * @Route("publierSortie/{id}", name="sortie_publier")
+     * @param EntityManagerInterface $em
+     * @param $id
+     * @return Response
      */
     public function publierSortie(EntityManagerInterface $em, $id): Response
     {
@@ -154,6 +172,8 @@ class SortieController extends AbstractController
 
     /**
      * @Route("afficherSortie/{id}", name="sortie_afficher")
+     * @param $id
+     * @return Response
      */
     public function afficherSortie($id): Response
     {
@@ -168,5 +188,97 @@ class SortieController extends AbstractController
         ]);
     }
 
+
+
+    private $date;
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+    /**
+     * @Route("inscription/{id}", name="sortie_inscription")
+     * @param EntityManagerInterface $em
+     * @param $id
+     * @return Response
+     */
+    public function inscription(EntityManagerInterface $em, $id): Response
+    {
+
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->find($id);
+
+        $nbInscription = $sortie->getInscriptions();
+        $nbInscriptionMax = $sortie->getNbInscriptionsMax();
+        $dateMaxInscription = $sortie->getDateCloture();
+
+        $user = $this->getUser();
+
+        if (count($nbInscription) < $nbInscriptionMax and $dateMaxInscription >  $this->date) {
+            $inscription = new Inscription();
+            $inscription->setParticipant($user);
+            $inscription->setSortie($sortie);
+            $inscription->setDateInscription($this->date);
+
+            if(count($nbInscription)+1 === $nbInscriptionMax){
+                $sortie->setEtatSortie('Cloturee');
+                $em->persist($sortie);
+            }
+
+            $em->persist($inscription);
+            $em->flush();
+
+            $this->addFlash('message', 'Votre inscription a bien été ajoutée !');
+            return $this->redirectToRoute('home');
+        }
+
+
+        if (count($nbInscription) === $nbInscriptionMax) {
+            $this->addFlash('error', 'Le nombre maximum de participant est atteint !');
+        }
+
+        if ( $this->date > $dateMaxInscription ) {
+            $this->addFlash('error', 'Vous ne pouvez pas vous inscrire à cette sortie, la date limite d\'inscription est dépassée');
+        }
+        return $this->redirectToRoute('home');
+
+    }
+
+
+    /**
+     * @Route("desister/{id}", name="sortie_desister")
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function desister(EntityManagerInterface $em, $id)
+    {
+
+        $participant = $this->getUser();
+
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->find($id);
+
+        $inscriptionRepository = $em->getRepository(Inscription::class);
+        $inscription = $inscriptionRepository->findBy(
+            ['sortie' => $sortie->getId(), 'participant' => $participant->getId()],
+            ['sortie' => 'ASC']
+        );
+
+        $nombreInscriptions = $sortie->getInscriptions();
+        $nombreInscriptionsMax = $sortie->getNbInscriptionsMax();
+        $etat = $sortie->getEtatSortie(); //ou getEtat
+        if(count($nombreInscriptions)-1 < $nombreInscriptionsMax && $etat === 'Cloture'){
+            $sortie->setEtat('Ouverte');
+            $em->persist($sortie);
+        }
+
+        $em->remove($inscription[0]);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre annulation a bien été prise en compte !');
+        return $this->redirectToRoute('home');
+
+      }
 
 }

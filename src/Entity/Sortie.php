@@ -63,6 +63,7 @@ class Sortie
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Participant", inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;
 
@@ -83,6 +84,7 @@ class Sortie
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $lieu;
 
@@ -170,7 +172,7 @@ class Sortie
     /**
      * @param mixed $dateCloture
      */
-    public function setDateCloture($dateCloture): void
+    public function setDateCloture( $dateCloture): void
     {
         $this->dateCloture = $dateCloture;
     }
@@ -287,6 +289,7 @@ class Sortie
         $this->etat = $etat;
     }
 
+
     public function getInscriptions()
     {
         return $this->inscriptions;
@@ -320,5 +323,6 @@ class Sortie
             return ($inscription->getParticipant() == $p);
         });
     }
+
 
 }

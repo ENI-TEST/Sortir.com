@@ -25,6 +25,7 @@ class Etat
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="etat", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $sorties;
 
