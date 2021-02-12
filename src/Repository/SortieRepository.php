@@ -41,7 +41,7 @@ class SortieRepository extends ServiceEntityRepository
         if(!empty($searchData->getMotCle())){
             $qb = $qb
                 ->andWhere('s.nom LIKE :motCle')
-                ->setParameter('motCle', "%{$searchData->getMotCle()}")
+                ->setParameter('motCle', "%{$searchData->getMotCle()}%")
             ;
         }
 
